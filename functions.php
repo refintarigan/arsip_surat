@@ -1,5 +1,6 @@
 <?php
-$conn = mysqli_connect("simpaten_db","root","kicky123","db_archivio");
+/*$conn = mysqli_connect("simpaten_db","root","kicky123","db_archivio");*/
+include "connect.php"; // Pastikan nama file sesuai
 function query($query){
 	global $conn;
 	$result = mysqli_query($conn,$query);
