@@ -15,7 +15,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
         // Set session login
         $_SESSION['stat_login'] = true;
-        $_SESSION['id_admin'] = $row['id_admin'];
+        /*$_SESSION['id_admin'] = $row['id_admin'];*/
 
         echo "<script>alert('Login berhasil!');</script>";
         echo "<script>window.location.href = 'dashboard.php';</script>";
