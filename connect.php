@@ -1,7 +1,7 @@
 <?php
-$host = "localhost"; 
+$host = "simpaten_db"; 
 $username = "root"; 
-$password = ""; 
+$password = "kicky123"; 
 $db = "db_archivio"; 
 
 $conn = mysqli_connect($host, $username, $password, $db);

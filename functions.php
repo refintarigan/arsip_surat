@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect("localhost","root","","db_archivio");
+$conn = mysqli_connect("simpaten_db","root","kicky123","db_archivio");
 function query($query){
 	global $conn;
 	$result = mysqli_query($conn,$query);
