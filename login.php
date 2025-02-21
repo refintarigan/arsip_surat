@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>LOGIN KICKY MAULANA</title>
+	<title>LOGIN eliza</title>
 	<style type="text/css">
 		body{
 			font-size: 11pt;
