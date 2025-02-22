@@ -20,7 +20,7 @@
 			width: 50%;
 			box-shadow: 0px 1px 10px -2px;
 		}
-		input[type=text], input[type=password]{
+		input[type=text], input[type=password], input[type=combobox]{
 			width: 50%;
 			margin: 10px 0px;
 			padding: 10px 20px;
@@ -73,6 +73,7 @@
 	<div class="container">
 	<input type="text" name="username" placeholder="Username" required autocomplete="off" autofocus>
 	<input type="password" name="password" placeholder="Password" required autocomplete="off" autofocus>
+	<input type="combobox" name="role"placeholder="status"required autocomplete="off" autofocus>
 	<button type="submit" name="login">Login </button><br>
 	<center><a class="link" href="icon.php">Back</center></div>
 	</form></center>
