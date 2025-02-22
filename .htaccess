@@ -1,0 +1,4 @@
+DirectoryIndex dashboard.php
+
+Options -Indexes
+RewriteEngine On

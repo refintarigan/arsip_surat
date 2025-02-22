@@ -8,10 +8,11 @@ if (!isset($_SESSION['stat_login'])) {
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php include "component/css.php"; ?>
     <title>HOME</title>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         * {
