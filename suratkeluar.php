@@ -13,116 +13,7 @@ if (isset($_POST["cari"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SURAT KELUAR</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: auto;
-            padding: 0;
-        }
-        input{
-            padding: 3px;
-            width: 60%;
-        }
-        table{
-            width: 100%;
-            border: 3px solid black;
-            margin-top: 10px;
-            font-size: 12pt;
-        }
-        table th{
-            background-color: lightskyblue;
-        }
-        table th, table td {
-            border: 2px solid black;
-        }
-        body {
-            font-family: "Times New Roman", serif;
-            line-height: 1.6;
-            background-color: #f0f0f0;
-            color: #000;
-        }
-
-        .header {
-            background-color: darkblue;
-            text-align: center;
-            padding: 10px;
-            color: white;
-        }
-
-        .header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-            color: black;
-        }
-
-        .menu {
-            float: left;
-            width: 12%;
-            background-color: navy;
-            padding: 10px 0;
-            height: 69vh;
-            color: white;
-        }
-
-        .menu a {
-            display: block;
-            padding: 10px;
-            color: white;
-            text-decoration: none;
-            text-align: center;
-            margin: 2px auto;
-        }
-
-        .menu a:hover {
-            background-color: #0056b3;
-        }
-
-        .main {
-            float: left;
-            width: 88%;
-            padding: 20px;
-            background-color: white;
-            color: black;
-            font-size: 13pt;
-            text-align: left;
-        }
-
-        .bottom {
-            margin-top: 20px;
-            margin-left: -20px;
-            background-color: lightskyblue;
-            color: black;
-            text-align: center;
-            padding: 10px;
-            clear: both;
-        }
-
-        img {
-            display: block;
-            margin: 10px auto;
-        }
-
-        @media (max-width: 768px) {
-            .menu {
-                width: 100%;
-                height: 100%;
-                float: none;
-            }
-
-            .menu a {
-                width: 100%;
-            }
-
-            .main {
-                width: 100%;
-                float: left;
-            }
-
-            .header h1 {
-                font-size: 2rem;
-            }
-        }
-    </style>
+   
 </head>
 <body>
     <!-- Header -->
@@ -133,7 +24,7 @@ if (isset($_POST["cari"])) {
 
     <!-- Menu -->
     <div class="menu">
-        <a href="dashboard.php">HOME</a>
+        <a href="index.php">HOME</a>
         <a href="suratmasuk.php">SURAT MASUK</a>
         <a href="suratkeluar.php">SURAT KELUAR</a>
         <a href="arsip.php">ARSIP SURAT</a>

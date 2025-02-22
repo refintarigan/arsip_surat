@@ -121,7 +121,7 @@ if (!isset($_SESSION['stat_login'])) {
 
     <!-- Menu -->
     <div class="menu">
-        <a href="dashboard.php">HOME</a>
+        <a href="index.php">HOME</a>
         <a href="suratmasuk.php">SURAT MASUK</a>
         <a href="suratkeluar.php">SURAT KELUAR</a>
         <a href="arsip.php">ARSIP SURAT</a>
