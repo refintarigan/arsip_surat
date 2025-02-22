@@ -1,5 +1,6 @@
 <?php
  include "../connection/functions.php";
+ var_dump($_SESSION);
 //  // Cek apakah pengguna sudah login
 // if(!isset($_SESSION['id_log'])) {
 //     // Jika sudah login, redirect ke halaman utama atau halaman dashboard

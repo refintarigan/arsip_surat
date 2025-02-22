@@ -1,7 +1,7 @@
 <?php
 include "connection/functions.php";
 // Cek apakah pengguna sudah login
-if(!isset($_SESSION['id_peserta'])) {
+if(!isset($_SESSION['id_log'])) {
     // Jika sudah login, redirect ke halaman utama atau halaman dashboard
     header("Location: user_log/login.php");
     exit();

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 21 Feb 2025 pada 08.06
--- Versi server: 10.4.32-MariaDB
--- Versi PHP: 8.0.30
+-- Generation Time: Feb 22, 2025 at 12:31 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,31 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_archivio`
+-- Database: `surat`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `schema_migrations`
---
-
-CREATE TABLE `schema_migrations` (
-  `version` bigint(20) NOT NULL,
-  `dirty` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `schema_migrations`
---
-
-INSERT INTO `schema_migrations` (`version`, `dirty`) VALUES
-(3, 0);
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `surat_keluar`
+-- Table structure for table `surat_keluar`
 --
 
 CREATE TABLE `surat_keluar` (
@@ -56,7 +38,7 @@ CREATE TABLE `surat_keluar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `surat_keluar`
+-- Dumping data for table `surat_keluar`
 --
 
 INSERT INTO `surat_keluar` (`kode_surat`, `waktu_keluar`, `nomor_surat`, `tanggal_surat`, `perihal`, `pengirim`, `kepada`) VALUES
@@ -66,7 +48,7 @@ INSERT INTO `surat_keluar` (`kode_surat`, `waktu_keluar`, `nomor_surat`, `tangga
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `surat_keluars`
+-- Table structure for table `surat_keluars`
 --
 
 CREATE TABLE `surat_keluars` (
@@ -82,7 +64,7 @@ CREATE TABLE `surat_keluars` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `surat_masuk`
+-- Table structure for table `surat_masuk`
 --
 
 CREATE TABLE `surat_masuk` (
@@ -97,7 +79,7 @@ CREATE TABLE `surat_masuk` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `surat_masuk`
+-- Dumping data for table `surat_masuk`
 --
 
 INSERT INTO `surat_masuk` (`kode_surat`, `waktu_masuk`, `nomor_surat`, `tanggal_surat`, `perihal`, `pengirim`, `kepada`, `lampiran`) VALUES
@@ -112,7 +94,7 @@ INSERT INTO `surat_masuk` (`kode_surat`, `waktu_masuk`, `nomor_surat`, `tanggal_
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -120,78 +102,73 @@ CREATE TABLE `users` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role` varchar(255) NOT NULL,
-  `name` longtext DEFAULT NULL,
-  `email` longtext DEFAULT NULL
+  `name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `users`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `role`, `name`, `email`) VALUES
-(2911, 'refin', '1234', '', 'Refin', 'refintarigan2910@gmail.com');
+INSERT INTO `users` (`id`, `username`, `password`, `role`, `name`) VALUES
+(2911, 'refin', '$2y$10$9jOESt5X1D7kd8fvye2o2uh6id7XxtZeiIf3gN5tyPrDrYoewv57a', '', 'Refin'),
+(2912, 'yogi123', '$2y$10$i7mDtyEwYX5yoIiQzgq6S.YjCBPpb.tFHPMhlYTh68MCZkcP4MtJy', 'admin', 'yogi irwan syahputra'),
+(2913, 'yogi123', '$2y$10$pC/NrWGdc.Vo3mZDkHcwUuQtgCTTyw4QyIeWpTbHY1aBWth1AHVhG', 'admin', 'yogi irwan syahputra');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `schema_migrations`
---
-ALTER TABLE `schema_migrations`
-  ADD PRIMARY KEY (`version`);
-
---
--- Indeks untuk tabel `surat_keluar`
+-- Indexes for table `surat_keluar`
 --
 ALTER TABLE `surat_keluar`
   ADD PRIMARY KEY (`kode_surat`);
 
 --
--- Indeks untuk tabel `surat_keluars`
+-- Indexes for table `surat_keluars`
 --
 ALTER TABLE `surat_keluars`
   ADD PRIMARY KEY (`kode_surat`);
 
 --
--- Indeks untuk tabel `surat_masuk`
+-- Indexes for table `surat_masuk`
 --
 ALTER TABLE `surat_masuk`
   ADD PRIMARY KEY (`kode_surat`);
 
 --
--- Indeks untuk tabel `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `surat_keluar`
+-- AUTO_INCREMENT for table `surat_keluar`
 --
 ALTER TABLE `surat_keluar`
   MODIFY `kode_surat` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10200;
 
 --
--- AUTO_INCREMENT untuk tabel `surat_keluars`
+-- AUTO_INCREMENT for table `surat_keluars`
 --
 ALTER TABLE `surat_keluars`
   MODIFY `kode_surat` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `surat_masuk`
+-- AUTO_INCREMENT for table `surat_masuk`
 --
 ALTER TABLE `surat_masuk`
   MODIFY `kode_surat` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26534524;
 
 --
--- AUTO_INCREMENT untuk tabel `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2912;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2915;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
