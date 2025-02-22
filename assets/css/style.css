@@ -5,7 +5,7 @@
 }
 
 /*index*/
-        * {
+/* * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
@@ -103,7 +103,7 @@
 
 
 /*suratmasuk*/
-        * {
+/* * {
             box-sizing: border-box;
             margin: auto;
             padding: 0;
@@ -209,11 +209,10 @@
             .header h1 {
                 font-size: 2rem;
             }
-        }
-
+        } */
 
 /*suratkeluar*/
-* {
+/* * {
   box-sizing: border-box;
   margin: auto;
   padding: 0;
@@ -320,10 +319,10 @@ img {
   .header h1 {
       font-size: 2rem;
   }
-}
+} */
 
 /*arsip*/
-* {
+/* * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -391,9 +390,9 @@ body {
 img {
   display: block;
   margin: 10px auto;
-}
+} */
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .menu {
       width: 100%;
       height: 100%;
@@ -412,4 +411,4 @@ img {
   .header h1 {
       font-size: 2rem;
   }
-}
+} */
