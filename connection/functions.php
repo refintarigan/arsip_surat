@@ -42,38 +42,38 @@ if (isset($_SESSION['pesan'])) {
     unset($_SESSION['pesan']);
 }
 
-function tambahDataUser($data)
-{
-    global $conn;
-    $idUnik = uniqid();
-    $nomorPendaftaran = strtoupper($idUnik);
-    $nama = strtolower(htmlspecialchars($data['nama']));
-    $username = htmlspecialchars(stripslashes($data['username']));
-    $password = htmlspecialchars(mysqli_real_escape_string($conn, $data['password']));
-    $password2 = htmlspecialchars(mysqli_real_escape_string($conn, $data['password2']));
-    $status = 'D';
-    $result = mysqli_query(
-        $conn, "SELECT username FROM tb_users WHERE username = '$username'",
-    );
+// function tambahDataUser($data)
+// {
+//     global $conn;
+//     $idUnik = uniqid();
+//     $nomorPendaftaran = strtoupper($idUnik);
+//     $nama = strtolower(htmlspecialchars($data['nama']));
+//     $username = htmlspecialchars(stripslashes($data['username']));
+//     $password = htmlspecialchars(mysqli_real_escape_string($conn, $data['password']));
+//     $password2 = htmlspecialchars(mysqli_real_escape_string($conn, $data['password2']));
+//     $status = 'D';
+//     $result = mysqli_query(
+//         $conn, "SELECT username FROM tb_users WHERE username = '$username'",
+//     );
 
-    if (mysqli_fetch_assoc($result)) {
-        setAlert('gagal', 'Username telah digunakan!', 'error');
-        header('Location: registrasi.php');
-    }
-    if ($password !== $password2) {
-        setAlert('gagal', 'Password dan konfirmasi password tidak sesuai!!', 'error');
-        header('Location: registrasi.php');
-        return false;
-    }
+//     if (mysqli_fetch_assoc($result)) {
+//         setAlert('gagal', 'Username telah digunakan!', 'error');
+//         header('Location: registrasi.php');
+//     }
+//     if ($password !== $password2) {
+//         setAlert('gagal', 'Password dan konfirmasi password tidak sesuai!!', 'error');
+//         header('Location: registrasi.php');
+//         return false;
+//     }
 
-    //enkrpsi
-    $password = password_hash($password, PASSWORD_DEFAULT);
+//     //enkrpsi
+//     $password = password_hash($password, PASSWORD_DEFAULT);
 
-    mysqli_query(
-        $conn,
-        "INSERT INTO `tb_users`(`id_peserta`, `nama_peserta`, `username`,
-    `password`,`ps`, `status`) VALUES ('$nomorPendaftaran', '$nama', '$username',
-    '$password', '$password2', '$status')",
-    );
-    return mysqli_affected_rows($conn);
-}
+//     mysqli_query(
+//         $conn,
+//         "INSERT INTO `users`(`id_peserta`, `nama_peserta`, `username`,
+//     `password`,`ps`, `status`) VALUES ('$nomorPendaftaran', '$nama', '$username',
+//     '$password', '$password2', '$status')",
+//     );
+//     return mysqli_affected_rows($conn);
+// }

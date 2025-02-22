@@ -1,7 +1,15 @@
 <?php
- include "connection/connection.php";
- $password = password_hash("yogi123", PASSWORD_DEFAULT);
- mysqli_query($conn, "INSERT INTO users VALUE('')")
+ include "../connection/functions.php";
+//  // Cek apakah pengguna sudah login
+// if(!isset($_SESSION['id_log'])) {
+//     // Jika sudah login, redirect ke halaman utama atau halaman dashboard
+//     header("Location: ../index.php");
+//     exit();
+// }
+ $password = password_hash("user_1", PASSWORD_DEFAULT);
+//  mysqli_query($conn, "INSERT INTO users VALUE('', 'user_1', '$password', 'admin', 'user_1')");
+//  die();
+// mysqli_query($conn, "UPDATE users SET password = '$password' WHERE id = 2911 ");
 ?>
 <!DOCTYPE html>
 <html>
@@ -47,4 +55,6 @@
     </div>
 </section>
 </body>
+	<?php include "../component/login/css.php"; ?>
 </html>
+

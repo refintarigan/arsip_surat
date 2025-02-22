@@ -1,7 +1,9 @@
 <?php
-session_start();
-if (!isset($_SESSION['stat_login'])) {
-    header("Location: login.php");
+include "connection/functions.php";
+// Cek apakah pengguna sudah login
+if(!isset($_SESSION['id_peserta'])) {
+    // Jika sudah login, redirect ke halaman utama atau halaman dashboard
+    header("Location: user_log/login.php");
     exit();
 }
 ?>
