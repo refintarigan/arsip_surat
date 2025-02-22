@@ -27,7 +27,7 @@ if (isset($_POST["cari"])) {
         <a href="suratmasuk.php">SURAT MASUK</a>
         <a href="suratkeluar.php">SURAT KELUAR</a>
         <a href="arsip.php">ARSIP SURAT</a>
-        <a href="login.php">LOGOUT</a>
+        <a href="logout.php">LOGOUT</a>
     </div>
 
     <!-- Main Content -->

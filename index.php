@@ -13,103 +13,7 @@ if (!isset($_SESSION['stat_login'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HOME</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: "Times New Roman", serif;
-            background-color: #f0f0f0;
-            color: #000;
-        }
-
-        .header {
-            background-color: white;
-            text-align: center;
-            padding: 10px;
-        }
-
-        .header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-            color: black;
-        }
-
-        .menu {
-            float: left;
-            width: 15%;
-            background-color: navy;
-            padding: 10px 0;
-            height: 100vh;
-            color: white;
-        }
-
-        .menu a {
-            display: block;
-            padding: 10px;
-            color: white;
-            text-decoration: none;
-            text-align: center;
-            margin: 5px auto;
-        }
-
-        .menu a:hover {
-            background-color: #0056b3;
-        }
-
-        .main {
-            float: left;
-            width: 85%;
-            height: 20%;
-            padding: 20px;
-            background-color: white;
-            color: black;
-            font-size: 13pt;
-            text-align: justify;
-        }
-
-        .chart-container {
-            float: left;
-            width: 70%;
-            margin: 20px auto;
-        }
-
-        @media (max-width: 768px) {
-            .menu {
-                width: 100%;
-                height: auto;
-                float: none;
-            }
-
-            .menu a {
-                width: 100%;
-            }
-
-            .main {
-                width: 50%;
-                float: none;
-            }
-
-            .header h1 {
-                font-size: 2rem;
-            }
-        }
-        .bottom {
-            margin-top: 20px;
-            margin-left: -20px;
-            background-color: lightskyblue;
-            color: black;
-            text-align: center;
-            padding: 10px;
-            clear: both;
-        }
-        canvas{
-            max-width: 450px;
-        }
-    </style>
+    
 </head>
 <body>
 
@@ -125,6 +29,8 @@ if (!isset($_SESSION['stat_login'])) {
         <a href="suratmasuk.php">SURAT MASUK</a>
         <a href="suratkeluar.php">SURAT KELUAR</a>
         <a href="arsip.php">ARSIP SURAT</a>
+        <a href="pengaturan.php">SETTING</a>
+        <a href="account.php">ACCOUNT</a>
         <a href="logout.php">LOGOUT</a>
     </div>
 
