@@ -14,7 +14,7 @@
 <div class="container">
     <div style="height:100vh;" class="row justify-content-center align-items-center">
         <div class="col-md-8 ">
-            <a class="link" href="login.php">
+            <a class="link" href="user_log/login.php">
                 <img src="assets/img/logoo.PNG" width="100%">
             </a>
             <h3 class="text-center">Silahkan Klik Icon di atas !</h3>
