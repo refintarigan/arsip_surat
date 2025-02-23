@@ -37,7 +37,7 @@ if (isset($_POST["cari"])) {
         <form action="" method="POST">
             <center><input type="text" name="keyword" placeholder="Cari data surat..." autofocus>
             <button type="submit" name="cari">Cari</button></center>
-            <button><a href="addsurat.php">Tambah Data</a></button>
+            <button> <a href="addsurat.php">Tambah Data</a> </button>
         <table>
             <thead>
                 <tr>
