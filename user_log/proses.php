@@ -1,22 +1,5 @@
 <?php
-if (!$_POST || !$_GET) {
-  header('Location: ../error/505.php');
-}
-
 include '../connection/functions.php';
-
-if(isset($_POST["daftar"])) {
-  if(tambahDataUser($_POST) > 0 ) {
-    setAlert("Akun Berhasil Dibuat", "Silahkan Login Mengunakan Username Dan Password Yang Kamu Daftarkan", "success");
-    header('Location: login.php');
-    exit();       
-  }else {
-    setAlert("Akun Berhasil Dibuat", "Silahkan Login Mengunakan Username Dan Password Yang Kamu Daftarkan", "success");
-    header('Location: registrasi.php');
-    exit();  
-  }
-}
-
 
 if(isset($_POST["login"])) {
   $username = mysqli_real_escape_string($conn, $_POST["username"]);
@@ -27,9 +10,9 @@ if(isset($_POST["login"])) {
   if(mysqli_num_rows($result) === 1) {
       $row = mysqli_fetch_assoc($result);
       if(password_verify($password, $row["password"])) {
-          $_SESSION['id_log'] = $row['id'];
+          $_SESSION['id_user'] = $row['id'];
           
-        setAlert("Berhasil Login", "Selamat Datang di Website PPDB tamansiswa Lubuk Pakam", "success");
+        setAlert("Berhasil Login", "Selamat Datang di Website manajemen surat", "success");
         header('Location: ../index.php');
         exit(); 
       } else {

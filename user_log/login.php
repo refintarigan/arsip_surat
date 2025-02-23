@@ -1,16 +1,15 @@
 <?php
  include "../connection/functions.php";
- //var_dump($_SESSION);
-//  // Cek apakah pengguna sudah login
-// if(!isset($_SESSION['id_log'])) {
-//     // Jika sudah login, redirect ke halaman utama atau halaman dashboard
-//     header("Location: ../index.php");
-//     exit();
-// }
+ // Cek apakah pengguna sudah login
+if(isset($_SESSION['id_user'])) {
+    // Jika sudah login, redirect ke halaman utama atau halaman dashboard
+    header("Location: ../index.php");
+    exit();
+}
  $password = password_hash("user_1", PASSWORD_DEFAULT);
 //  mysqli_query($conn, "INSERT INTO users VALUE('', 'user_1', '$password', 'admin', 'user_1')");
-//  die();
 // mysqli_query($conn, "UPDATE users SET password = '$password' WHERE id = 2911 ");
+//  die();
 ?>
 <!DOCTYPE html>
 <html>
@@ -50,6 +49,6 @@
     </div>
 </section>
 </body>
-	<?php include "../component/login/css.php"; ?>
+	<?php include "../component/login/js.php"; ?>
 </html>
 

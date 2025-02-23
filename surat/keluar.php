@@ -1,5 +1,5 @@
 <?php
-include "connection/functions.php";
+include "../connection/functions.php";
 if(!isset($_SESSION['id_user'])) {
     setAlert("Anda belum Login!", "Silahkan melakukan login terlebih dahulu", "error");
     header("Location: user_log/login.php");
@@ -11,13 +11,13 @@ if(!isset($_SESSION['id_user'])) {
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <title>HOME</title>
-    <?php include "component/css.php"; ?>
+    <title>HOME</title>
+    <?php include "../component/infolder/css.php"; ?>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
-    <?php include 'component/sidebar.php'; ?>
-    <?php include 'component/navbar.php'; ?>
+    <?php include '../component/infolder/sidebar.php'; ?>
+    <?php include '../component/infolder/navbar.php'; ?>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -48,7 +48,10 @@ if(!isset($_SESSION['id_user'])) {
                     </div>
                 </div>
             </div>
-
-<?php include "component/js.php"; ?>
+        </div>
+</div>
+</div>
+</div> 
+<?php include "../component/infolder/js.php"; ?>
 </body>
 </html>

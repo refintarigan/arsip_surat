@@ -21,4 +21,4 @@
 <link href="../assets/css/style.css" rel="stylesheet">
 <link href="../assets/index2.css" rel="stylesheet">
 <!-- Favicon -->
-<!-- <link rel="icon" href="assets/img/img_properties/logo.png"> -->
+<link rel="icon" href=".../assets/img/logoo.png">

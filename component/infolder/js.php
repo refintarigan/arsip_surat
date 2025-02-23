@@ -19,6 +19,6 @@
 <script src="../assets/adminlte/adminlte.min.js"></script>
 
 <!-- config -->
-<script src="../assets/js/datatables-config.js"></script>
+<script src="../assets/js/dataTableConfig.js"></script>
 <script src="../assets/js/fancybox-config.js"></script>
 <script src="../assets/js/sweetalert2-config.js"></script>
