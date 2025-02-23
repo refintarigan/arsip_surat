@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>LOGIN</title>
+    <?php include "component/css.php"; ?>
 	<style>
         body{
             background-color: black;
@@ -12,10 +11,16 @@
 	</style>
 </head>
 <body>
-    <center>
-        <br><br><br>
-<a class="link" href="login.php"><img src="logoo.PNG" width="65%"></a>
-<p>Silahkan Klik Icon di atas !</p>
-</center>
+<div class="container">
+    <div style="height:100vh;" class="row justify-content-center align-items-center">
+        <div class="col-md-8 ">
+            <a class="link" href="login.php">
+                <img src="assets/img/logoo.PNG" width="100%">
+            </a>
+            <h3 class="text-center">Silahkan Klik Icon di atas !</h3>
+        </div>
+    </div>
+</div>
+<?php include "component/js.php"; ?>
 </body>
 </html>

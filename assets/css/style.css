@@ -3,6 +3,10 @@
   background-image: url("../img/");
   background-color: aqua;
 }
+@import url("datatables.net-dt");
+@import url("datatables.net-searchbuilder-dt");
+@import url("datatables.net-searchpanes-dt");
+@import url("datatables.net-select-dt");
 
 /*index*/
 /* * {
@@ -412,3 +416,8 @@ img {
       font-size: 2rem;
   }
 } */
+
+.card-home {
+  border-top-width: 5px;
+  border-top-color: blue;
+}
