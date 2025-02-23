@@ -1,13 +1,9 @@
 /*login*/
-.login {
-  background-image: url("../img/");
-  background-color: aqua;
+.login{
+  background-image: url("../img/bglogin2.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
-@import url("datatables.net-dt");
-@import url("datatables.net-searchbuilder-dt");
-@import url("datatables.net-searchpanes-dt");
-@import url("datatables.net-select-dt");
-
 /*index*/
 /* * {
             box-sizing: border-box;

@@ -11,7 +11,7 @@ if(!isset($_SESSION['id_user'])) {
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <title>HOME</title>
+  <title>HOME</title>
     <?php include "component/css.php"; ?>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -48,10 +48,7 @@ if(!isset($_SESSION['id_user'])) {
                     </div>
                 </div>
             </div>
-        </div>
-</div>
-</div>
-</div> 
+
 <?php include "component/js.php"; ?>
 </body>
 </html>
