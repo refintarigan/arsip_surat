@@ -21,4 +21,7 @@
 <!-- config -->
 <script src="../assets/js/dataTableConfig.js"></script>
 <script src="../assets/js/fancybox-config.js"></script>
-<script src="../assets/js/sweetalert2-config.js"></script>
+<script src="../assets/js/config-sidebar.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js"></script>
+
+

@@ -14,7 +14,8 @@ if(isset($_SESSION['id_user'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<?php include "../component/login/css.php"; ?>
+	<?php include "../component/infolder/css.php"; ?>
+    <link href="../assets/index2.css" rel="stylesheet">
 	<title>LOGIN</title>
 </head>
 <body>
@@ -49,6 +50,6 @@ if(isset($_SESSION['id_user'])) {
     </div>
 </section>
 </body>
-	<?php include "../component/login/js.php"; ?>
+	<?php include "../component/infolder/js.php"; ?>
 </html>
 
