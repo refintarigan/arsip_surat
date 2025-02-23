@@ -28,7 +28,7 @@
                         <form class="p-3" action="proses.php" method="post">
                             <div class="card-body">
                                 <div class="logo">
-                                    <img src="../assets/img/logoo.png" alt="Logo Archivio" width="60%">
+                                    <img src="../assets/img/logoo.png" alt="Logo Archivio" width="50%">
                                 </div>
                                 <h4 class="text-center text-bold">ARCHIVIO</h4>
                             </div>
