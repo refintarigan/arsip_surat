@@ -6,7 +6,7 @@ if(isset($_SESSION['id_user'])) {
     header("Location: ../index.php");
     exit();
 }
- $password = password_hash("user_1", PASSWORD_DEFAULT);
+ $password = password_hash("refin2910", PASSWORD_DEFAULT);
 //  mysqli_query($conn, "INSERT INTO users VALUE('', 'user_1', '$password', 'admin', 'user_1')");
 // mysqli_query($conn, "UPDATE users SET password = '$password' WHERE id = 2911 ");
 //  die();
@@ -14,7 +14,7 @@ if(isset($_SESSION['id_user'])) {
 <!DOCTYPE html>
 <html>
 <head>
-	<?php include "../component/infolder/css.php"; ?>
+	<?php include "../component/css.php"; ?>
     <link href="../assets/index2.css" rel="stylesheet">
 	<title>LOGIN</title>
 </head>
@@ -40,7 +40,7 @@ if(isset($_SESSION['id_user'])) {
                             <input class="form-control mb-3 invalid" type="text" name="username" id="username" autocomplete="off" required>
 
                             <label class="mb-3" for="password">Password</label>
-                            <input class="form-control mb-3" type="password" name="password" id="password" required>
+                            <input class="form-control mb-3" type="password" name="password" id="password" required autocomplete="off">
                             <button type="submit" class="btn btn-primary mt-2" name="login"> Login <i class="fa fa-arrow-right"></i></button>
                         </form>
                     </div>
@@ -50,6 +50,6 @@ if(isset($_SESSION['id_user'])) {
     </div>
 </section>
 </body>
-	<?php include "../component/infolder/js.php"; ?>
+	<?php include "../component/js.php"; ?>
 </html>
 
