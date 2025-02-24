@@ -31,10 +31,16 @@ if(!isset($_SESSION['id_user'])) {
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <img src="assets/img/logo2.png" width="100%" alt="">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <img src="assets/img/logo-kominfo.jpg" width="100%" alt="">
+                                            <div class="row mt-4">
+                                                <div class="col-md-12">
+                                                    <div class="card shadow border-0">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title text-center">Grafik Surat Masuk dan Surat Keluar Bulan Ini</h5>
+                                                            <canvas id="suratChart"></canvas>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -50,5 +56,41 @@ if(!isset($_SESSION['id_user'])) {
             </div>
 
 <?php include "component/js.php"; ?>
+<script>
+    const labels = <?php echo json_encode($labels); ?>;
+    const dataSuratMasuk = <?php echo json_encode($suratMasuk); ?>;
+    const dataSuratKeluar = <?php echo json_encode($suratKeluar); ?>;
+
+    const ctx = document.getElementById('suratChart').getContext('2d');
+    const suratChart = new Chart(ctx, {
+        type: 'bar', // jenis grafik (bar, line, pie, dll)
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Surat Masuk',
+                    data: dataSuratMasuk,
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Surat Keluar',
+                    data: dataSuratKeluar,
+                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
 </body>
 </html>
