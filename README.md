@@ -27,7 +27,7 @@
 
 ## 📸 Tampilan Antarmuka
 
-![Archivio Dashboard](https://github.com/refintarigan/assets/img/git.jpg)
+![Archivio Dashboard](assets/img/git.jpg)
 
 ## 📥 Instalasi & Penggunaan
 
