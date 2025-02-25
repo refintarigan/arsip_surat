@@ -197,7 +197,7 @@ if (empty($surat)) {
                 <?php if ($isWordFile) { ?>
                     <!-- Jika file Word, tampilkan link download -->
                     <p>File tidak dapat ditampilkan, silakan unduh:</p>
-                    <a href="../download/surat_masuk.php?id_surat=<?= encode_id($surat['id']); ?>" class="btn btn-primary">Download File</a>
+                    <a href="<?= $base_url; ?>download/surat_keluar.php?id_surat=<?= encode_id($surat['id']); ?>" class="btn btn-primary">Download File</a>
                 <?php } else { ?>
                     <!-- Jika bukan file Word (contoh: PDF), tampilkan dalam iframe -->
                     <iframe id="file-preview" class="w-100" style="height: 400px;" src="<?php echo $filePath; ?>"></iframe>

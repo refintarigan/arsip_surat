@@ -330,7 +330,7 @@ function tambahSuratKeluar($data)
 {
     global $conn;
 
-    $kode = htmlspecialchars($data["kode_surat"]);
+    $kode = strval(htmlspecialchars($data["kode_surat"]));
     $waktu = htmlspecialchars($data["waktu_masuk"]);
     $nomor = htmlspecialchars($data["nomor_surat"]);
     $tanggal = htmlspecialchars($data["tanggal_surat"]);
@@ -379,13 +379,6 @@ function cekLogin($url)
         exit();
     }
 }
-
-
-
-// function cari($keyword){
-// $query = "SELECT * FROM surat_masuk WHERE perihal LIKE '$keyword' ";
-// return query($query);
-// }
 
 // function tambahDataUser($data)
 // {
