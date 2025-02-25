@@ -13,12 +13,12 @@ $surat_masuk = mysqli_query($conn, "SELECT * FROM surat_masuk");
 <html lang="id">
 <head>
     <title>Surat Masuk</title>
-    <?php include "../component/infolder/css.php"; ?>
+    <?php include "../component/css.php"; ?>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
-    <?php include '../component/infolder/sidebar.php'; ?>
-    <?php include '../component/infolder/navbar.php'; ?>
+    <?php include '../component/sidebar.php'; ?>
+    <?php include '../component/navbar.php'; ?>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -172,13 +172,16 @@ $surat_masuk = mysqli_query($conn, "SELECT * FROM surat_masuk");
             <h5 class="card-title"></h5>
             <div class="row">
               <div class="col-md-3 mb-2">
-                <select id="filterTahun" class="form-control">
-                  <option value="">Pilih Tahun</option>
-                  <option value="2025">2025</option>
-                  <option value="2024">2024</option>
-                  <option value="2023">2023</option>
-                  <option value="2022">2022</option>
-                </select>
+
+                  <select id="filterTahun" class="form-control">
+                      <option value="">Pilih Tahun</option>
+                      <?php
+                          $tahunSekarang = date("Y"); // Ambil tahun saat ini
+                          for ($tahun = $tahunSekarang; $tahun >= 2011; $tahun--) {
+                              echo "<option value='$tahun'>$tahun</option>";
+                          }
+                      ?>
+                  </select>
               </div>
               <div class="col-md-3 mb-2">
                 <select id="filterBulan" class="form-control">
@@ -242,7 +245,7 @@ $surat_masuk = mysqli_query($conn, "SELECT * FROM surat_masuk");
                 <td><?= $surat['pengirim']; ?></td>
                 <td><?= $surat['kepada']; ?></td>
                 <td>
-                  <a href="detail_surat.php?id_surat=<?= encode_id($surat['id']); ?>" class="btn btn-sm mb-1 btn-info"><i class="fas fa-eye"></i> Detail</a>
+                  <a href="detail/surat_masuk.php?id_surat=<?= encode_id($surat['id']); ?>" class="btn btn-sm mb-1 btn-info"><i class="fas fa-eye"></i> Detail</a>
                 </td>
               </tr>
               <?php }; ?>
@@ -263,46 +266,79 @@ $surat_masuk = mysqli_query($conn, "SELECT * FROM surat_masuk");
 </div>
 </div> 
 
-<?php include "../component/infolder/js.php"; ?>
+<?php include "../component/js.php"; ?>
 <script>
-    $(document).ready(function() {
+$(document).ready(function() {
     var table = $('#table_id').DataTable();
 
     $('#btnFilter').click(function() {
         var tahun = $('#filterTahun').val();
         var bulan = $('#filterBulan').val();
-        var tanggal = $('#filterTanggal').val();
+        var tanggal = $('#filterTanggal').val(); // Format: YYYY-MM-DD
         var nomorSurat = $('#filterNomorSurat').val();
         var perihal = $('#filterPerihal').val().toLowerCase();
 
-        // Custom filtering function
+        // Hapus semua filter sebelumnya
+        $.fn.dataTable.ext.search.length = 0;
+
         $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
-            var waktuMasuk = data[2] || ''; // Kolom "Waktu Masuk"
-            var tanggalSurat = data[4] || ''; // Kolom "Tanggal Surat"
-            var perihalSurat = data[5].toLowerCase() || ''; // Kolom "Perihal"
-            var nomorSuratData = data[3] || ''; // Kolom "Nomor Surat"
 
-            var dateObj = new Date(waktuMasuk);
-            var rowYear = dateObj.getFullYear().toString();
-            var rowMonth = ('0' + (dateObj.getMonth() + 1)).slice(-2);
+            var waktuKeluar = data[2] || ''; // Format di tabel: dd/mm/yyyy
+            var tanggalSurat = data[4] || ''; // Format di tabel: dd/mm/yyyy
+            var perihalSurat = data[5] ? data[5].toLowerCase() : ''; // Perihal dalam lowercase
+            var nomorSuratData = data[3] || ''; // Nomor surat di tabel
 
-            if ((tahun && rowYear !== tahun) || 
-                (bulan && rowMonth !== bulan) || 
-                (tanggal && waktuMasuk !== tanggal) || 
-                (nomorSurat && nomorSuratData !== nomorSurat) || 
+
+            // Konversi tanggal dari tabel ke format yang bisa dibandingkan
+            function convertTanggal(tanggal) {
+                var parts = tanggal.split('/');
+                if (parts.length === 3) {
+                    return {
+                        year: parts[2], 
+                        month: parts[1], 
+                        day: parts[0] 
+                    };
+                }
+                return { year: '', month: '', day: '' };
+            }
+
+            var waktuKeluarParsed = convertTanggal(waktuKeluar);
+            var tanggalSuratParsed = convertTanggal(tanggalSurat);
+
+            // Konversi format tanggal input (YYYY-MM-DD) ke format dd/mm/yyyy
+            var inputTanggal = '';
+            var inputTahun = '';
+            var inputBulan = '';
+
+            if (tanggal) {
+                var dateParts = tanggal.split('-'); // [YYYY, MM, DD]
+                inputTahun = dateParts[0];
+                inputBulan = dateParts[1];
+                inputTanggal = dateParts[2];
+            }
+
+            // Filter berdasarkan tahun, bulan, tanggal
+            if ((tahun && waktuKeluarParsed.year !== tahun && tanggalSuratParsed.year !== tahun) ||
+                (bulan && waktuKeluarParsed.month !== bulan && tanggalSuratParsed.month !== bulan) ||
+                (tanggal && waktuKeluarParsed.day !== inputTanggal && tanggalSuratParsed.day !== inputTanggal) ||
+                (nomorSurat && nomorSuratData !== nomorSurat) ||
                 (perihal && perihalSurat.indexOf(perihal) === -1)) {
                 return false;
             }
             return true;
         });
 
-        table.draw(); // Update DataTables setelah filter diterapkan
-        $.fn.dataTable.ext.search.pop(); // Hapus filter agar tidak menumpuk
+        table.draw(); // Terapkan filter pada DataTable
     });
 
     $('#btnReset').click(function() {
-        $('#filterTahun, #filterBulan, #filterTanggal, #filterNomorSurat').val('');
-        $('#filterPerihal').val('');
+        // Kosongkan input filter
+        $('#filterTahun, #filterBulan, #filterTanggal, #filterNomorSurat, #filterPerihal').val('');
+
+        // Hapus semua filter yang diterapkan
+        $.fn.dataTable.ext.search.length = 0;
+
+        // Reset DataTable ke kondisi awal
         table.search('').columns().search('').draw();
     });
 });

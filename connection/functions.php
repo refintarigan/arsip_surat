@@ -2,7 +2,10 @@
 include "connection.php";
 session_start();
 //timezone
-date_default_timezone_set('Asia/Jakarta');function encode_id($id)
+date_default_timezone_set('Asia/Jakarta');
+$base_url = "http://localhost/arsip_surat/";
+
+function encode_id($id)
 {
     global $conn;
     $id = mysqli_real_escape_string($conn, $id);
@@ -80,7 +83,7 @@ function tambahSuratMasuk($data)
     // Simpan hasil lampiran hanya jika ada file yang diunggah
     $lampiran = lampiran();
     if ($lampiran === NULL) {
-        $lampiran = 'Tidak Ada'; // Bisa diisi dengan string default
+        $lampiran = NULL; // Bisa diisi dengan string default
     }
 
     $query = "INSERT INTO surat_masuk (kode_surat, waktu_masuk, nomor_surat, tanggal_surat, perihal, pengirim, kepada, lampiran) 
@@ -90,10 +93,11 @@ function tambahSuratMasuk($data)
     return mysqli_affected_rows($conn);
 }
 
+
 function lampiran()
 {
     if (!isset($_FILES['file_surat']) || $_FILES['file_surat']['error'] === 4) {
-        return NULL; // Tidak ada file yang diunggah, tetap lanjut tanpa error
+        return NULL; // NULL file yang diunggah, tetap lanjut tanpa error
     }
 
     $namaFile = $_FILES['file_surat']['name'];
@@ -129,48 +133,132 @@ function lampiran()
 function editSuratMasuk($surat) 
 {
     global $conn;
-    $id = decode_id("surat_masuk", $surat['id_surat'], "id")["id"];
-    $kode_surat = mysqli_real_escape_string($conn, htmlspecialchars($surat["kode_surat"]));
-    $waktu_masuk = mysqli_real_escape_string($conn, htmlspecialchars($surat["waktu_masuk"]));
-    $nomor_surat = mysqli_real_escape_string($conn, htmlspecialchars($surat["nomor_surat"]));
-    $tanggal_surat = mysqli_real_escape_string($conn, htmlspecialchars($surat["tanggal_surat"]));
-    $perihal = mysqli_real_escape_string($conn, htmlspecialchars($surat["perihal"]));
-    $pengirim = mysqli_real_escape_string($conn, htmlspecialchars($surat["pengirim"]));
-    $kepada = mysqli_real_escape_string($conn, htmlspecialchars($surat["kepada"]));
+    
+    // Decode ID dan pastikan hasilnya valid
+    $decoded_id = decode_id("surat_masuk", $surat['id_surat'], "id");
+    if (!isset($decoded_id["id"])) {
+        return -1; // ID tidak valid
+    }
+    $id = $decoded_id["id"];
+
+    // Validasi & Escape Input
+    $kode_surat = htmlspecialchars($surat["kode_surat"]);
+    $waktu_masuk = htmlspecialchars($surat["waktu_masuk"]);
+    $nomor_surat = htmlspecialchars($surat["nomor_surat"]);
+    $tanggal_surat = htmlspecialchars($surat["tanggal_surat"]);
+    $perihal = htmlspecialchars($surat["perihal"]);
+    $pengirim = htmlspecialchars($surat["pengirim"]);
+    $kepada = htmlspecialchars($surat["kepada"]);
 
     // Panggil editLampiran dan dapatkan nama file baru jika ada
     $lampiran = editLampiran($id);
 
-    // Query update
+    // Query update dengan kode_surat dikembalikan
     $query = "UPDATE surat_masuk SET 
-              waktu_masuk = '$waktu_masuk',
-              nomor_surat = '$nomor_surat',
-              tanggal_surat = '$tanggal_surat',
-              perihal = '$perihal',
-              pengirim = '$pengirim',
-              kepada = '$kepada'";
+              kode_surat = ?, 
+              waktu_masuk = ?, 
+              nomor_surat = ?, 
+              tanggal_surat = ?, 
+              perihal = ?, 
+              pengirim = ?, 
+              kepada = ?";
 
-    // Jika ada file baru, tambahkan lampiran ke query
+    // Jika ada file baru, tambahkan kolom lampiran
+    $params = [$kode_surat, $waktu_masuk, $nomor_surat, $tanggal_surat, $perihal, $pengirim, $kepada];
+    $types = "sssssss";
+
     if ($lampiran !== NULL) {
-        $query .= ", lampiran = '$lampiran'";
+        $query .= ", lampiran = ?";
+        $params[] = $lampiran;
+        $types .= "s";
     }
 
-    $query .= " WHERE id = '$id'";
+    $query .= " WHERE id = ?";
+    $params[] = $id;
+    $types .= "i";
 
-    $result = mysqli_query($conn, $query);
+    // Persiapkan query
+    if ($stmt = mysqli_prepare($conn, $query)) {
+        // Binding parameter secara dinamis
+        mysqli_stmt_bind_param($stmt, $types, ...$params);
 
-    if (!$result) {
-        die("Query Error: " . mysqli_error($conn));
+        // Eksekusi statement
+        mysqli_stmt_execute($stmt);
+        $affected_rows = mysqli_stmt_affected_rows($stmt);
+        mysqli_stmt_close($stmt);
+        return $affected_rows;
+    } else {
+        return -1; // Indikasi gagal eksekusi query
     }
-
-    return mysqli_affected_rows($conn);
 }
+function editSuratKeluar($surat) 
+{
+    global $conn;
+    
+    // Decode ID dan pastikan hasilnya valid
+    $decoded_id = decode_id("surat_keluar", $surat['id_surat'], "id");
+    if (!isset($decoded_id["id"])) {
+        return -1; // ID tidak valid
+    }
+    $id = $decoded_id["id"];
+
+    // Validasi & Escape Input
+    $kode_surat = htmlspecialchars($surat["kode_surat"]);
+    $waktu_masuk = htmlspecialchars($surat["waktu_keluar"]);
+    $nomor_surat = htmlspecialchars($surat["nomor_surat"]);
+    $tanggal_surat = htmlspecialchars($surat["tanggal_surat"]);
+    $perihal = htmlspecialchars($surat["perihal"]);
+    $pengirim = htmlspecialchars($surat["pengirim"]);
+    $kepada = htmlspecialchars($surat["kepada"]);
+
+    // Panggil editLampiran dan dapatkan nama file baru jika ada
+    $lampiran = editLampiran($id);
+
+    // Query update dengan kode_surat dikembalikan
+    $query = "UPDATE surat_keluar SET 
+              kode_surat = ?, 
+              waktu_keluar = ?, 
+              nomor_surat = ?, 
+              tanggal_surat = ?, 
+              perihal = ?, 
+              pengirim = ?, 
+              kepada = ?";
+
+    // Jika ada file baru, tambahkan kolom lampiran
+    $params = [$kode_surat, $waktu_masuk, $nomor_surat, $tanggal_surat, $perihal, $pengirim, $kepada];
+    $types = "sssssss";
+
+    if ($lampiran !== NULL) {
+        $query .= ", lampiran = ?";
+        $params[] = $lampiran;
+        $types .= "s";
+    }
+
+    $query .= " WHERE id = ?";
+    $params[] = $id;
+    $types .= "i";
+
+    // Persiapkan query
+    if ($stmt = mysqli_prepare($conn, $query)) {
+        // Binding parameter secara dinamis
+        mysqli_stmt_bind_param($stmt, $types, ...$params);
+
+        // Eksekusi statement
+        mysqli_stmt_execute($stmt);
+        $affected_rows = mysqli_stmt_affected_rows($stmt);
+        mysqli_stmt_close($stmt);
+        return $affected_rows;
+    } else {
+        return -1; // Indikasi gagal eksekusi query
+    }
+}
+
 
 function editLampiran($id)
 {
     global $conn;
     if (!isset($_FILES['file_surat']) || $_FILES['file_surat']['error'] === 4) {
-        return NULL; // Tidak ada file yang diunggah, tetap lanjut tanpa error
+        return NULL; 
     }
 
     $namaFile = $_FILES['file_surat']['name'];
@@ -206,7 +294,6 @@ function editLampiran($id)
     mysqli_stmt_fetch($stmt);
     mysqli_stmt_close($stmt);
 
-    // Jika ada file lama, hapus dulu sebelum menimpa
     if (!empty($lampiranLama)) {
         $fileLama = '../../assets/files/surat_masuk/' . $lampiranLama;
         if (file_exists($fileLama)) {
@@ -214,11 +301,10 @@ function editLampiran($id)
         }
     }
 
-    // Simpan file baru
     if (move_uploaded_file($tmpName, $targetPath)) {
         return $namaFileBaru;
     } else {
-        return NULL; // Jika gagal menyimpan file, tetap lanjut
+        return NULL; 
     }
 }
 
@@ -230,6 +316,71 @@ function hapusSurat($data){
     unlink($tmp_file);
 	return mysqli_affected_rows($conn);
 }
+
+function hapusSuratKeluar($data){
+	global $conn;
+    $id = $data['id'];
+	mysqli_query($conn, "DELETE FROM surat_keluar WHERE id=$id");
+    $tmp_file = '../../assets/files/surat_masuk/' . $data['lampiran'];
+    unlink($tmp_file);
+	return mysqli_affected_rows($conn);
+}
+
+function tambahSuratKeluar($data) 
+{
+    global $conn;
+
+    $kode = htmlspecialchars($data["kode_surat"]);
+    $waktu = htmlspecialchars($data["waktu_masuk"]);
+    $nomor = htmlspecialchars($data["nomor_surat"]);
+    $tanggal = htmlspecialchars($data["tanggal_surat"]);
+    $perihal = htmlspecialchars($data["perihal"]);
+    $pengirim = htmlspecialchars($data["pengirim"]);
+    $kepada = htmlspecialchars($data["kepada"]);
+
+    $lampiran = lampiran();
+    if ($lampiran === NULL) {
+        $lampiran = NULL;
+    }
+
+    $query = "INSERT INTO surat_keluar (kode_surat, waktu_keluar, nomor_surat, tanggal_surat, perihal, pengirim, kepada, lampiran) 
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    
+    if ($stmt = mysqli_prepare($conn, $query)) {
+        mysqli_stmt_bind_param($stmt, "ssssssss", $kode, $waktu, $nomor, $tanggal, $perihal, $pengirim, $kepada, $lampiran);
+        mysqli_stmt_execute($stmt);
+        $affected_rows = mysqli_stmt_affected_rows($stmt);
+        mysqli_stmt_close($stmt);
+        return $affected_rows;
+    } else {
+        return -1; 
+    }
+}
+
+
+function getSuratMasuk($conn) {
+    $query = "SELECT * FROM surat_keluar";
+    $stmt = mysqli_prepare($conn, $query); 
+
+    if ($stmt) {
+        mysqli_stmt_execute($stmt); 
+        $result = mysqli_stmt_get_result($stmt); 
+        return $result;
+    } else {
+        return false;
+    }
+}
+
+function cekLogin($url) 
+{
+    if (!isset($_SESSION['id_user'])) {
+        setAlert("Anda belum Login!", "Silahkan melakukan login terlebih dahulu", "error");
+        header("Location: $url");
+        exit();
+    }
+}
+
+
 
 // function cari($keyword){
 // $query = "SELECT * FROM surat_masuk WHERE perihal LIKE '$keyword' ";
