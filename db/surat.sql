@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 25, 2025 at 04:26 AM
+-- Generation Time: Feb 26, 2025 at 06:05 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `surat_keluar` (
   `id` int(11) NOT NULL,
-  `kode_surat` int(255) NOT NULL,
+  `kode_surat` varchar(255) NOT NULL,
   `waktu_keluar` timestamp NOT NULL DEFAULT current_timestamp(),
   `nomor_surat` varchar(255) NOT NULL,
   `tanggal_surat` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -44,7 +44,11 @@ CREATE TABLE `surat_keluar` (
 --
 
 INSERT INTO `surat_keluar` (`id`, `kode_surat`, `waktu_keluar`, `nomor_surat`, `tanggal_surat`, `perihal`, `pengirim`, `kepada`, `lampiran`) VALUES
-(5, 1, '0000-00-00 00:00:00', '2T349721739197', '0000-00-00 00:00:00', '141604', '107480', '18410', '67bca85a21304.pdf');
+(5, '1', '0000-00-00 00:00:00', '2T349721739197', '0000-00-00 00:00:00', '141604', '107480', '18410', '67bca85a21304.pdf'),
+(6, '1', '2025-02-24 17:00:00', '001', '2025-02-24 17:00:00', '001', '001', '001', '67bd4d2c49a11.pdf'),
+(7, '1', '2025-02-24 17:00:00', '001', '2025-02-24 17:00:00', '001', '001', '001', NULL),
+(8, '1', '2025-02-24 17:00:00', '001', '2025-02-24 17:00:00', '001', '001', '001', NULL),
+(9, '001', '2025-02-24 17:00:00', '001', '2025-02-24 17:00:00', '001', '001', '001', '67bd57957cab0.pdf');
 
 -- --------------------------------------------------------
 
@@ -71,7 +75,8 @@ CREATE TABLE `surat_masuk` (
 INSERT INTO `surat_masuk` (`id`, `kode_surat`, `waktu_masuk`, `nomor_surat`, `tanggal_surat`, `perihal`, `pengirim`, `kepada`, `lampiran`) VALUES
 (5, '007', '2025-02-14 17:00:00', '006', '2025-02-14 17:00:00', '007', 'yogi', 'yono', '67bca3ee9fffc.pdf'),
 (6, '003', '2025-02-27 17:00:00', '003', '2025-02-23 17:00:00', '002', '002', '002', '67bc39f02bf79.pdf'),
-(7, '001', '2025-02-23 17:00:00', '002', '2025-02-27 17:00:00', 'pemberian izin', 'apa aj', 'apa iya', '67bc7e660a127.pdf');
+(7, '001', '2025-02-23 17:00:00', '002', '2025-02-27 17:00:00', 'pemberian izin', 'apa aj', 'apa iya', '67bc7e660a127.pdf'),
+(9, '001', '2025-02-24 17:00:00', '001', '2025-02-24 17:00:00', '001', '001', '001', '');
 
 -- --------------------------------------------------------
 
@@ -84,16 +89,16 @@ CREATE TABLE `users` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role` varchar(255) NOT NULL,
-  `name` varchar(255) DEFAULT NULL
+  `name` varchar(255) DEFAULT NULL,
+  `foto` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `role`, `name`) VALUES
-(2911, 'refin', '$2y$10$MAuL6tFL3C.0A7MxKz8Gi.8YrlY3RMYLKff7VJJToJuzEAnxcK5/y', '', 'Refin'),
-(2912, 'yogi123', '$2y$10$i7mDtyEwYX5yoIiQzgq6S.YjCBPpb.tFHPMhlYTh68MCZkcP4MtJy', 'admin', 'yogi irwan syahputra');
+INSERT INTO `users` (`id`, `username`, `password`, `role`, `name`, `foto`) VALUES
+(2923, 'yogi123', '$2y$10$BkBPp6sMl4WJH3bn0A0DJu.AhypVq952rwHWLMsH7pxoXX5DNfpHe', 'pegawai', 'yogi irwan syahputra', 'user_1740499500.png');
 
 --
 -- Indexes for dumped tables
@@ -125,19 +130,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `surat_keluar`
 --
 ALTER TABLE `surat_keluar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `surat_masuk`
 --
 ALTER TABLE `surat_masuk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2915;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2924;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
