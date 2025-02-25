@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 23, 2025 at 10:42 PM
+-- Generation Time: Feb 25, 2025 at 04:26 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -28,38 +28,23 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `surat_keluar` (
+  `id` int(11) NOT NULL,
   `kode_surat` int(255) NOT NULL,
-  `waktu_keluar` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `waktu_keluar` timestamp NOT NULL DEFAULT current_timestamp(),
   `nomor_surat` varchar(255) NOT NULL,
-  `tanggal_surat` date NOT NULL,
+  `tanggal_surat` timestamp NOT NULL DEFAULT current_timestamp(),
   `perihal` varchar(255) NOT NULL,
   `pengirim` varchar(255) NOT NULL,
-  `kepada` varchar(255) NOT NULL
+  `kepada` varchar(255) NOT NULL,
+  `lampiran` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `surat_keluar`
 --
 
-INSERT INTO `surat_keluar` (`kode_surat`, `waktu_keluar`, `nomor_surat`, `tanggal_surat`, `perihal`, `pengirim`, `kepada`) VALUES
-(10103, '2025-02-03 08:14:36', '123Suratizin', '2025-02-03', 'Izin menggunakan gedung untuk acara peresmian', 'HRD PT.Original', 'Kabag.Umum Setdakab'),
-(10199, '2025-02-06 08:27:17', '3874974', '2025-02-06', 'jeijf', 'dnjkjs', 'iedu8e');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `surat_keluars`
---
-
-CREATE TABLE `surat_keluars` (
-  `kode_surat` bigint(20) UNSIGNED NOT NULL,
-  `waktu_masuk` longtext DEFAULT NULL,
-  `nomor_surat` longtext DEFAULT NULL,
-  `tanggal` longtext DEFAULT NULL,
-  `perihal` longtext DEFAULT NULL,
-  `pengirim` longtext DEFAULT NULL,
-  `kepada` longtext DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `surat_keluar` (`id`, `kode_surat`, `waktu_keluar`, `nomor_surat`, `tanggal_surat`, `perihal`, `pengirim`, `kepada`, `lampiran`) VALUES
+(5, 1, '0000-00-00 00:00:00', '2T349721739197', '0000-00-00 00:00:00', '141604', '107480', '18410', '67bca85a21304.pdf');
 
 -- --------------------------------------------------------
 
@@ -84,8 +69,9 @@ CREATE TABLE `surat_masuk` (
 --
 
 INSERT INTO `surat_masuk` (`id`, `kode_surat`, `waktu_masuk`, `nomor_surat`, `tanggal_surat`, `perihal`, `pengirim`, `kepada`, `lampiran`) VALUES
-(1, '001', '2025-02-22 17:00:00', '001', '2025-02-22 17:00:00', 'r', 'r', 'r', '67bb8f1eadae8.pdf'),
-(5, '002', '2025-02-23 17:00:00', '002', '2025-02-27 17:00:00', '003', '003', '003', '67bb962a1fdda.pdf');
+(5, '007', '2025-02-14 17:00:00', '006', '2025-02-14 17:00:00', '007', 'yogi', 'yono', '67bca3ee9fffc.pdf'),
+(6, '003', '2025-02-27 17:00:00', '003', '2025-02-23 17:00:00', '002', '002', '002', '67bc39f02bf79.pdf'),
+(7, '001', '2025-02-23 17:00:00', '002', '2025-02-27 17:00:00', 'pemberian izin', 'apa aj', 'apa iya', '67bc7e660a127.pdf');
 
 -- --------------------------------------------------------
 
@@ -106,7 +92,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`, `name`) VALUES
-(2911, 'refin', '$2y$10$BQRgT1PTVL9zZvR5q4vOfOmJ3AdwZBQ8E3abURqwTDP9o9ks7.0Vy', '', 'Refin'),
+(2911, 'refin', '$2y$10$MAuL6tFL3C.0A7MxKz8Gi.8YrlY3RMYLKff7VJJToJuzEAnxcK5/y', '', 'Refin'),
 (2912, 'yogi123', '$2y$10$i7mDtyEwYX5yoIiQzgq6S.YjCBPpb.tFHPMhlYTh68MCZkcP4MtJy', 'admin', 'yogi irwan syahputra');
 
 --
@@ -117,13 +103,7 @@ INSERT INTO `users` (`id`, `username`, `password`, `role`, `name`) VALUES
 -- Indexes for table `surat_keluar`
 --
 ALTER TABLE `surat_keluar`
-  ADD PRIMARY KEY (`kode_surat`);
-
---
--- Indexes for table `surat_keluars`
---
-ALTER TABLE `surat_keluars`
-  ADD PRIMARY KEY (`kode_surat`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `surat_masuk`
@@ -145,19 +125,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `surat_keluar`
 --
 ALTER TABLE `surat_keluar`
-  MODIFY `kode_surat` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10200;
-
---
--- AUTO_INCREMENT for table `surat_keluars`
---
-ALTER TABLE `surat_keluars`
-  MODIFY `kode_surat` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `surat_masuk`
 --
 ALTER TABLE `surat_masuk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
