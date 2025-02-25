@@ -3,6 +3,36 @@
   background-image: url("../img/bglogin2.jpg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card-body{
+  border-radius: 3px;
+  background-color: rgb(1, 24, 44);
+  color: rgb(255, 253, 253);
+  
+}
+.logo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+button[type="submit"] {
+  background-color: #00d1ff;
+  border: none;
+  border-radius: 50px;
+  color: #000;
+  padding: 10px 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background 0.3s ease;
+  width: 22%;
+}
+button[type="submit"]:hover {
+  background-color: #5ce1ff;
+  color: #fff;
 }
 /*index*/
 /* * {
