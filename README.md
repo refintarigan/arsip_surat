@@ -6,7 +6,7 @@
 
 ## 🚀 Fitur Utama
 
-- 🔐 **Login & Manajemen Pengguna** (Terdapat 3 role berbeda)
+- 🔐 **Login & Manajemen Pengguna** (Terdapat 2 role berbeda)
 - 📩 **Manajemen Surat Masuk** (Tambah, edit, hapus, dan cari surat masuk)
 - 📤 **Manajemen Surat Keluar** (Tambah, edit, hapus, dan cari surat keluar)
 - 📊 **Dashboard Statistik** (Menampilkan ringkasan data surat)
@@ -37,9 +37,9 @@
    ```
 2. **Import Database:**
    - Buat database di MySQL
-   - Import file `database.sql` yang ada di dalam folder `db`
+   - Import file `surat.sql` yang ada di dalam folder `db`
 3. **Konfigurasi Koneksi Database:**
-   - Buka file `config.php`
+   - Buka file `connection\connection.php`
    - Sesuaikan dengan kredensial database Anda
 4. **Jalankan di Localhost:**
    ```sh
