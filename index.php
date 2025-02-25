@@ -16,7 +16,7 @@ if(!isset($_SESSION['id_user'])) {
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
-    <?php include 'component/infolder/sidebar.php'; ?>
+    <?php include 'component/sidebar.php'; ?>
     <?php include 'component/navbar.php'; ?>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
