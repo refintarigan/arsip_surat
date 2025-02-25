@@ -1,6 +1,6 @@
 # Archivio
 
-![Archivio Banner](https://github.com/refintarigan/arsip_surat/assets/img/login.jpg)
+![Archivio Banner](assets/img/login.jpg)
 
 **Archivio** adalah aplikasi berbasis web yang digunakan untuk menyimpan dan mengelola dokumen-dokumen penting. Aplikasi ini dikembangkan oleh mahasiswa **STMIK Pelita Nusantara** dalam rangka **Praktik Kerja (PK)**.
 
