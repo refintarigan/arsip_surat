@@ -1,0 +1,19 @@
+.login {
+  background-image: url("../img/bglogin2.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card-body {
+  border-radius: 3px;
+  background-color: rgb(1, 24, 44);
+  color: rgb(255, 253, 253);
+}
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

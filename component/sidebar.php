@@ -87,7 +87,7 @@ if(!isset($_SESSION['id_user'])) {
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="<?= $base_url; ?>surat/masuk.php" class="nav-link">
+              <a href="<?= $base_url; ?>users_manajemen/user_akses.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p> Akses user</p>
               </a>

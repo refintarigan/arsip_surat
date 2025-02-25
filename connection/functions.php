@@ -83,7 +83,7 @@ function tambahSuratMasuk($data)
     // Simpan hasil lampiran hanya jika ada file yang diunggah
     $lampiran = lampiran();
     if ($lampiran === NULL) {
-        $lampiran = 'Tidak Ada'; // Bisa diisi dengan string default
+        $lampiran = NULL; // Bisa diisi dengan string default
     }
 
     $query = "INSERT INTO surat_masuk (kode_surat, waktu_masuk, nomor_surat, tanggal_surat, perihal, pengirim, kepada, lampiran) 
@@ -97,7 +97,7 @@ function tambahSuratMasuk($data)
 function lampiran()
 {
     if (!isset($_FILES['file_surat']) || $_FILES['file_surat']['error'] === 4) {
-        return NULL; // Tidak ada file yang diunggah, tetap lanjut tanpa error
+        return NULL; // NULL file yang diunggah, tetap lanjut tanpa error
     }
 
     $namaFile = $_FILES['file_surat']['name'];
@@ -317,6 +317,15 @@ function hapusSurat($data){
 	return mysqli_affected_rows($conn);
 }
 
+function hapusSuratKeluar($data){
+	global $conn;
+    $id = $data['id'];
+	mysqli_query($conn, "DELETE FROM surat_keluar WHERE id=$id");
+    $tmp_file = '../../assets/files/surat_masuk/' . $data['lampiran'];
+    unlink($tmp_file);
+	return mysqli_affected_rows($conn);
+}
+
 function tambahSuratKeluar($data) 
 {
     global $conn;
@@ -331,7 +340,7 @@ function tambahSuratKeluar($data)
 
     $lampiran = lampiran();
     if ($lampiran === NULL) {
-        $lampiran = 'Tidak Ada';
+        $lampiran = NULL;
     }
 
     $query = "INSERT INTO surat_keluar (kode_surat, waktu_keluar, nomor_surat, tanggal_surat, perihal, pengirim, kepada, lampiran) 

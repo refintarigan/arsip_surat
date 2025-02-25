@@ -71,19 +71,19 @@ if (isset($_POST['btnEditSuratKeluar'])) {
         }
 }
 
-//    //prosess hapus 
-//    if (isset($_GET["hapus_surat"])) {
-//       $id_surat = decode_id("surat_masuk", $_GET["hapus_surat"], "id");
-//       if (hapusSurat($id_surat) > 0) {
-//       setAlert("Berhasil", "Data berhasil di hapus", "success");
-//       header('Location: ../masuk.php'); 
-//       exit(); 
-//    } else {
-//       setAlert("Gagal", "Data gagal di hapus", "error");
-//       header('Location: ../masuk.php'); 
-//       exit(); 
-//    }
-//   }
+   //prosess hapus 
+   if (isset($_GET["hapus_suratKeluar"])) {
+      $id_surat = decode_id("surat_keluar", $_GET["hapus_suratKeluar"], "id");
+      if (hapusSuratKeluar($id_surat) > 0) {
+      setAlert("Berhasil", "Data berhasil di hapus", "success");
+      header('Location: ../keluar.php'); 
+      exit(); 
+   } else {
+      setAlert("Gagal", "Data gagal di hapus", "error");
+      header('Location: ../keluar.php'); 
+      exit(); 
+   }
+  }
 
   
 

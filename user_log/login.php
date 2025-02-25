@@ -2,7 +2,7 @@
  include "../connection/functions.php";
  // Cek apakah pengguna sudah login
 if(isset($_SESSION['id_user'])) {
-    // Jika sudah login, redirect ke halaman utama atau halaman dashboard
+    setAlert('Gagal!', 'Kamu sudah login, Selamat menggunakan sistem ini', 'success');
     header("Location: ../index.php");
     exit();
 }
@@ -15,7 +15,8 @@ if(isset($_SESSION['id_user'])) {
 <html>
 <head>
 	<?php include "../component/css.php"; ?>
-    <link href="../assets/index2.css" rel="stylesheet">
+
+    <link href="../assets/css/login.css" rel="stylesheet">
 	<title>LOGIN</title>
 </head>
 <body>

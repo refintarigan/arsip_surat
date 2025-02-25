@@ -17,7 +17,6 @@
 <script src="<?= $base_url; ?>assets/sweetalert2/sweetalert2.all.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?= $base_url; ?>assets/adminlte/adminlte.min.js"></script>
-
 <!-- config -->
 <script src="<?= $base_url; ?>assets/js/dataTableConfig.js"></script>
 <script src="<?= $base_url; ?>assets/js/fancybox-config.js"></script>

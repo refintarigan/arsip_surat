@@ -173,7 +173,7 @@ if (empty($surat)) {
                                     </form>
                                 </div>
                             </div>
-                            <a href="<?= $base_url; ?>surat/proses_data/proses_data_all.php?hapus_surat=<?= encode_id($surat['id']); ?>">
+                            <a href="<?= $base_url; ?>surat/proses_data/proses_data_all.php?hapus_suratKeluar=<?= encode_id($surat['id']); ?>">
                                 <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Hapus</button>
                             </a>
                         </td>
