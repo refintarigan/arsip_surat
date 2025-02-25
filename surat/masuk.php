@@ -169,11 +169,12 @@ $surat_masuk = mysqli_query($conn, "SELECT * FROM surat_masuk");
         <!-- FILTER MENU -->
         <div class="card shadow-sm bg-light mb-4">
           <div class="card-body">
-            <h5 class="card-title">Filter Surat</h5>
+            <h5 class="card-title"></h5>
             <div class="row">
               <div class="col-md-3 mb-2">
                 <select id="filterTahun" class="form-control">
                   <option value="">Pilih Tahun</option>
+                  <option value="2025">2025</option>
                   <option value="2024">2024</option>
                   <option value="2023">2023</option>
                   <option value="2022">2022</option>
@@ -279,7 +280,7 @@ $surat_masuk = mysqli_query($conn, "SELECT * FROM surat_masuk");
             var waktuMasuk = data[2] || ''; // Kolom "Waktu Masuk"
             var tanggalSurat = data[4] || ''; // Kolom "Tanggal Surat"
             var perihalSurat = data[5].toLowerCase() || ''; // Kolom "Perihal"
-            var nomorSuratData = data[1] || ''; // Kolom "Nomor Surat"
+            var nomorSuratData = data[3] || ''; // Kolom "Nomor Surat"
 
             var dateObj = new Date(waktuMasuk);
             var rowYear = dateObj.getFullYear().toString();
