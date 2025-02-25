@@ -169,9 +169,10 @@ $surat_masuk = mysqli_query($conn, "SELECT * FROM surat_masuk");
         <!-- FILTER MENU -->
         <div class="card shadow-sm bg-light mb-4">
           <div class="card-body">
-            <h5 class="card-title">Filter Surat</h5>
+            <h5 class="card-title"></h5>
             <div class="row">
               <div class="col-md-3 mb-2">
+
                   <select id="filterTahun" class="form-control">
                       <option value="">Pilih Tahun</option>
                       <?php
@@ -281,10 +282,12 @@ $(document).ready(function() {
         $.fn.dataTable.ext.search.length = 0;
 
         $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
+
             var waktuKeluar = data[2] || ''; // Format di tabel: dd/mm/yyyy
             var tanggalSurat = data[4] || ''; // Format di tabel: dd/mm/yyyy
             var perihalSurat = data[5] ? data[5].toLowerCase() : ''; // Perihal dalam lowercase
             var nomorSuratData = data[3] || ''; // Nomor surat di tabel
+
 
             // Konversi tanggal dari tabel ke format yang bisa dibandingkan
             function convertTanggal(tanggal) {
