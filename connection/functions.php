@@ -330,7 +330,7 @@ function tambahSuratKeluar($data)
 {
     global $conn;
 
-    $kode = htmlspecialchars($data["kode_surat"]);
+    $kode = strval(htmlspecialchars($data["kode_surat"]));
     $waktu = htmlspecialchars($data["waktu_masuk"]);
     $nomor = htmlspecialchars($data["nomor_surat"]);
     $tanggal = htmlspecialchars($data["tanggal_surat"]);
@@ -380,62 +380,109 @@ function cekLogin($url)
     }
 }
 
+function get_userLog($id) {
+    global $conn;
+    $query = "SELECT * FROM users WHERE id = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    return mysqli_fetch_assoc($result);
+}
 
 
-// function cari($keyword){
-// $query = "SELECT * FROM surat_masuk WHERE perihal LIKE '$keyword' ";
-// return query($query);
-// }
+function saveUser($data)
+{
+    global $conn;
+    global $base_url;
 
-// function tambahDataUser($data)
-// {
-//     global $conn;
-//     $idUnik = uniqid();
-//     $nomorPendaftaran = strtoupper($idUnik);
-//     $nama = strtolower(htmlspecialchars($data['nama']));
-//     $username = htmlspecialchars(stripslashes($data['username']));
-//     $password = htmlspecialchars(mysqli_real_escape_string($conn, $data['password']));
-//     $password2 = htmlspecialchars(mysqli_real_escape_string($conn, $data['password2']));
-//     $status = 'D';
-//     $result = mysqli_query(
-//         $conn, "SELECT username FROM tb_users WHERE username = '$username'",
-//     );
+    $nama = strtolower(htmlspecialchars($data['nama']));
+    $username = htmlspecialchars(stripslashes($data['username']));
+    $password = htmlspecialchars(mysqli_real_escape_string($conn, $data['password']));
+    $password2 = htmlspecialchars(mysqli_real_escape_string($conn, $data['password2']));
+    $role = htmlspecialchars($data['role']);
 
-//     if (mysqli_fetch_assoc($result)) {
-//         setAlert('gagal', 'Username telah digunakan!', 'error');
-//         header('Location: registrasi.php');
-//     }
-//     if ($password !== $password2) {
-//         setAlert('gagal', 'Password dan konfirmasi password tidak sesuai!!', 'error');
-//         header('Location: registrasi.php');
-//         return false;
-//     }
+    // Validasi username unik
+    $result = mysqli_query($conn, "SELECT username FROM users WHERE username = '$username'");
 
-//     //enkrpsi
-//     $password = password_hash($password, PASSWORD_DEFAULT);
+    if (mysqli_fetch_assoc($result)) {
+        setAlert('gagal', 'Username telah digunakan!', 'error');
+        header("Location:" . $base_url . "users_manajemen/user_akses.php");
+        exit;
+    }
 
-//     mysqli_query(
-//         $conn,
-//         "INSERT INTO `users`(`id_peserta`, `nama_peserta`, `username`,
-//     `password`,`ps`, `status`) VALUES ('$nomorPendaftaran', '$nama', '$username',
-//     '$password', '$password2', '$status')",
-//     );
-//     return mysqli_affected_rows($conn);
-// }
+    // Validasi password konfirmasi
+    if ($password !== $password2) {
+        setAlert('gagal', 'Password dan konfirmasi password tidak sesuai!!', 'error');
+        header('Location:' . $base_url . 'users_manajemen/user_akses.php');
+        exit;
+    }
 
-/*$conn = mysqli_connect("simpaten_db","root","kicky123","db_archivio");*/
-// include "connect.php"; // Pastikan nama file sesuai
-// function query($query){
-// 	global $conn;
-// 	$result = mysqli_query($conn,$query);
-// 	$rows =[];
-// 	while ($row = mysqli_fetch_assoc($result)) {
-// 		$rows[]= $row;
-// 	}
-// 	return $rows;
-// }
+    // Enkripsi password
+    $password = password_hash($password, PASSWORD_DEFAULT);
 
+    // Proses upload gambar dari Base64
+    $fotoPath = NULL;
+    if (!empty($data['foto'])) {
+        $base64 = $data['foto'];
+        list($type, $base64) = explode(';', $base64);
+        list(, $base64) = explode(',', $base64);
+        $imageData = base64_decode($base64);
 
+        // Nama file unik
+        $fileName = 'user_' . time() . '.png';
+        $filePath = '../../assets/img/user_profile/' . $fileName;
 
+        // Simpan file
+        if (file_put_contents($filePath, $imageData)) {
+            $fotoPath = $fileName; // Simpan hanya nama file untuk database
+        }
+    }
 
+    // Simpan data ke database
+    $query = "INSERT INTO users (username, password, role, name, foto) 
+              VALUES ('$username', '$password', '$role', '$nama', '$fotoPath')";
 
+    mysqli_query($conn, $query);
+
+    return mysqli_affected_rows($conn);
+}
+
+function updateUser($data)
+{
+    global $conn;
+    global $base_url;
+
+    $id = htmlspecialchars($data['id']);
+    $nama = strtolower(htmlspecialchars($data['nama']));
+    $username = htmlspecialchars(stripslashes($data['username']));
+    $role = htmlspecialchars($data['role']);
+    
+
+    // Update data user ke database
+    $query = "UPDATE users SET 
+              username = '$username', 
+              name = '$nama', 
+              role = '$role'
+              WHERE id = '$id'";
+
+    mysqli_query($conn, $query);
+
+    return mysqli_affected_rows($conn);
+}
+
+function hapusUser($id) 
+{
+    global $conn;
+    $id = decode_id("users", $id, "id");
+
+    $query = "DELETE FROM users WHERE id =" . $id['id'];
+    mysqli_query($conn, $query);
+     if (!empty($id['foto'])) {
+        $fileLama = '../../assets/img/user_profile/' . $id['foto'];
+        if (file_exists($fileLama)) {
+            unlink($fileLama);
+        }
+    }
+    return mysqli_affected_rows($conn);
+}

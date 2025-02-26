@@ -1,10 +1,5 @@
 <?php
-if(!isset($_SESSION['id_user'])) {
-   header("Location: user_log/login.php");
-    exit();
-}
-
-
+$get_userLog = get_userLog($_SESSION["id_user"]);
 ?>
 
 <!-- Main Sidebar Container -->
@@ -19,16 +14,19 @@ if(!isset($_SESSION['id_user'])) {
   <!-- Sidebar -->
   <div class="sidebar">
     <!-- Sidebar user panel (optional) -->
-    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center">
       <div class="image">
-        <img class="rounded-pill" style="width: 45px; height: 45px" src="<?= $base_url; ?>assets/img/avatar.png" alt="">
+          <img class="rounded-pill" style="width: 50px; height: 50px;" src="<?= $base_url; ?>assets/img/user_profile/<?= $get_userLog['foto']; ?>" alt="User Image">
       </div>
-      <div class="info">
-        <a href="<?= $base_url; ?>index.php" class="d-block">
-          REFIN HARISSANDI
-        </a>
+
+      <div class="info ml-2">
+          <a href="<?= $base_url; ?>index.php" class="d-block font-weight-bold">
+              <?= $get_userLog['name']; ?>
+          </a>
+          <span class="badge badge-success"><?= $get_userLog['role']; ?></span>
       </div>
-    </div>
+  </div>
+
 
     <!-- Sidebar Menu -->
     <nav class="mt-2">
