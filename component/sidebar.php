@@ -25,7 +25,7 @@ if(!isset($_SESSION['id_user'])) {
       </div>
       <div class="info">
         <a href="<?= $base_url; ?>index.php" class="d-block">
-          YOGI IRWAN SYAHPUTRA
+          REFIN HARISSANDI
         </a>
       </div>
     </div>
