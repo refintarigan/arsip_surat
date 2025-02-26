@@ -601,4 +601,3 @@ function jumlahSeluruhSurat()
     return count(getAllSurat($conn));
 }
 
-
