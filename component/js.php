@@ -23,5 +23,3 @@
 <script src="<?= $base_url; ?>assets/js/config-sidebar.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js"></script>
 <script src="<?= $base_url; ?>assets/js/script.js"></script>
-
-

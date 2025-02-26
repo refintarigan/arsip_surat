@@ -57,12 +57,12 @@ $users = mysqli_query($conn, "SELECT * FROM users");
                                                 <tr>
                                                     <td><?= $i++; ?></td>
                                                     <td>
-                                                        <img src="<?= $base_url; ?>assets/img/user_profile/<?= $user['foto']; ?>"
+                                                        <img class="rounded-lg" src="<?= $base_url; ?>assets/img/user_profile/<?= $user['foto']; ?>"
                                                              width="45px" alt="foto <?= $user['name']; ?>">
                                                     </td>
                                                     <td><?= $user['name']; ?></td>
                                                     <td><?= $user['username']; ?></td>
-                                                    <td><?= $user['role']; ?></td>
+                                                    <td><span class="badge badge-success"><?= $user['role']; ?></span></td>
                                                     <td>
                                                         <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editUserModal<?= $user['id']; ?>">
                                                             <i class="fas fa-edit"></i> Edit
