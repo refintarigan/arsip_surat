@@ -33,7 +33,7 @@
 
 1. **Clone Repository:**
    ```sh
-   git clone https://github.com/username/archivio.git
+   git clone https://github.com/refintarigan/arsip_surat.git
    ```
 2. **Import Database:**
    - Buat database di MySQL

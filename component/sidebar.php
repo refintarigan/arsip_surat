@@ -18,6 +18,7 @@ $get_userLog = get_userLog($_SESSION["id_user"]);
       <div class="image">
           <img class="rounded-pill" style="width: 50px; height: 50px;" src="<?= $base_url; ?>assets/img/user_profile/<?= $get_userLog['foto']; ?>" alt="User Image">
       </div>
+
       <div class="info ml-2">
           <a href="<?= $base_url; ?>index.php" class="d-block font-weight-bold">
               <?= $get_userLog['name']; ?>
