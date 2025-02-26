@@ -75,23 +75,25 @@ $get_userLog = get_userLog($_SESSION["id_user"]);
             </li>
           </ul>
         </li>
-        <li class="nav-item has-treeview">
-          <a href="<?= $base_url; ?>#" class="nav-link">
-            <i class="nav-icon fa fa-key"></i>
-            <p>
-              User Akses
-              <i class="fas fa-angle-left right"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="<?= $base_url; ?>users_manajemen/user_akses.php" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p> Akses user</p>
-              </a>
-            </li>
-          </ul>
-        </li>
+        <?php if ($get_userLog['role'] === "admin") { ?>
+          <li class="nav-item has-treeview">
+            <a href="<?= $base_url; ?>#" class="nav-link">
+              <i class="nav-icon fa fa-key"></i>
+              <p>
+                User Akses
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?= $base_url; ?>users_manajemen/user_akses.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p> Akses user</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+        <?php } ?>
         <li class="nav-item has-treeview">
           <a href="<?= $base_url; ?>#" class="nav-link">
             <i class="nav-icon fa fa-cog"></i>
