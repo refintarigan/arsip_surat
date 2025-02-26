@@ -1,7 +1,7 @@
 <?php
 include "../connection/functions.php";
 cekLogin("../user_log/login.php");
-$surat_masuk = getSuratMasuk($conn);
+$surat_masuk = getSuratKeluar();
 
 ?>
 

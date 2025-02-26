@@ -94,31 +94,6 @@ $get_userLog = get_userLog($_SESSION["id_user"]);
             </ul>
           </li>
         <?php } ?>
-        <li class="nav-item has-treeview">
-          <a href="<?= $base_url; ?>#" class="nav-link">
-            <i class="nav-icon fa fa-cog"></i>
-            <p>
-              Pengaturan
-              <i class="fas fa-angle-left right"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="<?= $base_url; ?>surat/masuk.php" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p> kop surat</p>
-              </a>
-            </li>
-          </ul>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="<?= $base_url; ?>surat/keluar.php" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p> </p>
-              </a>
-            </li>
-          </ul>
-        </li>
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

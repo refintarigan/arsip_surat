@@ -51,3 +51,47 @@ button[type="submit"]:hover {
   border-top-width: 5px;
   border-top-color: blue;
 }
+.card.card-img-holder {
+  position: relative;
+}
+.card.card-img-holder .card-img-absolute {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+}
+.card.bg-blue-gradient {
+  background: linear-gradient(to right, #065efd, #3169fd, #6f79fc);
+  color: #fff;
+}
+.card.bg-orange-gradient {
+  background: linear-gradient(to right, #ff7f2e, #fe7452);
+  color: #fff;
+}
+.card.bg-green-gradient {
+  background: linear-gradient(to right, #24e8a6, #09cdd1);
+  color: #fff;
+}
+.card.card-no-shadow {
+  box-shadow: none;
+}
+
+.card-grey {
+  background: #dde1e1;
+}
+
+.card-banner {
+  background: #f7e9cc;
+  border-bottom: 7px solid #fed713;
+}
+
+.card-blue {
+  background: #b5d3f5;
+  color: #075fa5;
+}
+.card-blue a {
+  color: #075fa5;
+}
+
+
+

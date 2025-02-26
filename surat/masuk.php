@@ -6,7 +6,7 @@ if(!isset($_SESSION['id_user'])) {
     exit();
 }
 
-$surat_masuk = mysqli_query($conn, "SELECT * FROM surat_masuk");
+$surat_masuk = getSuratMasuk();
 ?>
 
 <!DOCTYPE html>
