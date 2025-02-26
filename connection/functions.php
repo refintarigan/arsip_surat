@@ -358,8 +358,24 @@ function tambahSuratKeluar($data)
 }
 
 
-function getSuratMasuk($conn) {
+function getSuratKeluar() 
+{
+    global $conn;
     $query = "SELECT * FROM surat_keluar";
+    $stmt = mysqli_prepare($conn, $query); 
+
+    if ($stmt) {
+        mysqli_stmt_execute($stmt); 
+        $result = mysqli_stmt_get_result($stmt); 
+        return $result;
+    } else {
+        return false;
+    }
+}
+function getSuratMasuk() 
+{
+    global $conn;
+    $query = "SELECT * FROM surat_masuk";
     $stmt = mysqli_prepare($conn, $query); 
 
     if ($stmt) {
@@ -499,3 +515,90 @@ function getAllSurat($conn) {
     $result = $conn->query($sql);
     return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
 }
+
+function getCountSuratMasukByDay($conn) {
+    $query = "SELECT COUNT(*) as total FROM surat_masuk WHERE DATE(tanggal_surat) = CURDATE()";
+    $result = mysqli_query($conn, $query);
+    return ($result) ? mysqli_fetch_assoc($result)['total'] : 0;
+}
+
+
+function getCountSuratMasukByYear($conn, $year) {
+    $query = "SELECT COUNT(*) as total FROM surat_masuk WHERE YEAR(tanggal_surat) = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "i", $year);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    return ($result) ? mysqli_fetch_assoc($result)['total'] : 0;
+}
+
+function getCountSuratKeluarByDay($conn) {
+    $query = "SELECT COUNT(*) as total FROM surat_keluar WHERE DATE(tanggal_surat) = CURDATE()";
+    $result = mysqli_query($conn, $query);
+    return ($result) ? mysqli_fetch_assoc($result)['total'] : 0;
+}
+
+
+function getCountSuratKeluarByYear($conn, $year) {
+    $query = "SELECT COUNT(*) as total FROM surat_keluar WHERE YEAR(tanggal_surat) = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "i", $year);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    return ($result) ? mysqli_fetch_assoc($result)['total'] : 0;
+}
+
+
+
+
+function getCountSuratMasukByDayInMonth($conn) {
+    $currentMonth = date('m'); // Bulan saat ini
+    $currentYear = date('Y'); // Tahun saat ini
+    $data = array_fill(1, 31, 0); // Inisialisasi array dengan 31 angka 0
+
+    $query = "SELECT DAY(tanggal_surat) as day, COUNT(*) as jumlah 
+              FROM surat_masuk 
+              WHERE MONTH(tanggal_surat) = ? AND YEAR(tanggal_surat) = ? 
+              GROUP BY day";
+    
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("ss", $currentMonth, $currentYear);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    while ($row = $result->fetch_assoc()) {
+        $data[$row['day']] = $row['jumlah']; // Isi array dengan data dari database
+    }
+
+    return array_values($data); // Konversi array agar berformat JSON yang sesuai
+}
+
+function getCountSuratKeluarByDayInMonth($conn) {
+    $currentMonth = date('m');
+    $currentYear = date('Y');
+    $data = array_fill(1, 31, 0);
+
+    $query = "SELECT DAY(tanggal_surat) as day, COUNT(*) as jumlah 
+              FROM surat_keluar 
+              WHERE MONTH(tanggal_surat) = ? AND YEAR(tanggal_surat) = ? 
+              GROUP BY day";
+    
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("ss", $currentMonth, $currentYear);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    while ($row = $result->fetch_assoc()) {
+        $data[$row['day']] = $row['jumlah'];
+    }
+
+    return array_values($data);
+}
+
+function jumlahSeluruhSurat() 
+{
+    global $conn;
+    return count(getAllSurat($conn));
+}
+
+
