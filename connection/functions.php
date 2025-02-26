@@ -486,3 +486,16 @@ function hapusUser($id)
     }
     return mysqli_affected_rows($conn);
 }
+
+// Fungsi untuk mendapatkan semua surat masuk dan keluar
+function getAllSurat($conn) {
+    $sql = "SELECT 'Surat Keluar' AS jenis, kode_surat, waktu_keluar AS waktu, nomor_surat, tanggal_surat, perihal, pengirim, kepada, lampiran 
+            FROM surat_keluar
+            UNION ALL
+            SELECT 'Surat Masuk' AS jenis, kode_surat, waktu_masuk AS waktu, nomor_surat, tanggal_surat, perihal, pengirim, kepada, lampiran 
+            FROM surat_masuk
+            ORDER BY waktu DESC";
+
+    $result = $conn->query($sql);
+    return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
+}
