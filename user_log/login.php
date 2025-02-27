@@ -43,6 +43,7 @@ if(isset($_SESSION['id_user'])) {
                             <label class="mb-3" for="password">Password</label>
                             <input class="form-control mb-3" type="password" name="password" id="password" required autocomplete="off">
                             <button type="submit" class="btn btn-primary mt-2" name="login"> Login <i class="fa fa-arrow-right"></i></button>
+                      <a href="../Icon.php">Back</a>
                         </form>
                     </div>
                 </div>

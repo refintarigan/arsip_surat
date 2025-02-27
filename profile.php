@@ -7,7 +7,7 @@ cekLogin("user_log/login.php");
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <title>Surat Keluar</title>
+    <title>PROFILE</title>
     <?php include "component/css.php"; ?>
     <styLe>
         .profile-header {
@@ -54,12 +54,12 @@ cekLogin("user_log/login.php");
                 <div class="col-md-5 ">
                     <div class="card">
                         <div class="profile-header">
-                            <img src="assets/img/user_profile/user_1740549934.png" alt="Profile Image" class="profile-img">
-                            <h3 class="mt-3" id="nama">Yogi Irwan Syahputra</h3>
-                            <p class="text-muted" id="username">@yogiirwan</p>
+                            <img src="assets/img/user_profile/<?= $get_userLog['foto'];?>" alt="Profile Image" class="profile-img">
+                            <h3 class="mt-3" id="nama"><?= $get_userLog['name'];?></h3>
+                            <p class="text-muted" id="username"><?= $get_userLog['username'];?></p>
                         </div>
                         <div class="card-body text-center">
-                            <h5 class="text-primary" id="role">Administrator</h5>
+                            <h5 class="text-primary" id="role"><?= $get_userLog['role'];?></h5>
                         </div>
                     </div>
                 </div>

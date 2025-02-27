@@ -21,7 +21,7 @@ $get_userLog = get_userLog($_SESSION["id_user"]);
 
       <div class="info ml-2">
           <a href="<?= $base_url; ?>index.php" class="d-block font-weight-bold">
-              <?= $get_userLog['name']; ?>
+              <?= strtoupper($get_userLog['name']); ?>
           </a>
           <span class="badge badge-success"><?= $get_userLog['role']; ?></span>
       </div>
