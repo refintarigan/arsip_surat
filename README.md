@@ -2,7 +2,7 @@
 
 ![Archivio Banner](assets/img/login.jpg)
 
-**Archivio** adalah aplikasi berbasis web yang digunakan untuk menyimpan dan mengelola dokumen-dokumen penting. Aplikasi ini dikembangkan oleh mahasiswa **STMIK Pelita Nusantara** dalam rangka **Praktik Kerja (PK)**.
+**Archivio** adalah aplikasi berbasis web yang digunakan untuk menyimpan dan mengelola dokumen-dokumen penting. Aplikasi ini dikembangkan oleh mahasiswa **STMIK Pelita Nusantara** dalam rangka **Kerja Praktik (KP)**.
 
 ## 🚀 Fitur Utama
 
