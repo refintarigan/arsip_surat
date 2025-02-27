@@ -96,7 +96,7 @@ $jumlahSurat = jumlahSeluruhSurat();
                     <div class="col-md-6">
                         <div class="card shadow">
                             <div class="card-header">
-                                <h5 class="card-title">Surat Bulan Ini</h5>
+                                <h5 class="card-title">Surat Bulan Lalu</h5>
                             </div>
                             <div class="card-body">
                                 <canvas id="chartBarMonth"></canvas>
