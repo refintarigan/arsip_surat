@@ -17,7 +17,7 @@ if(isset($_SESSION['id_user'])) {
 	<?php include "../component/css.php"; ?>
 
     <link href="../assets/css/login.css" rel="stylesheet">
-	<title>LOGIN ELIN</title>
+	<title>LOGIN</title>
 </head>
 <body>
 	<section class="login">
