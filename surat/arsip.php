@@ -8,7 +8,7 @@ $surat_list = getAllSurat($conn);
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <title>Surat Keluar</title>
+    <title>ARSIP</title>
     <?php include "../component/css.php"; ?>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
