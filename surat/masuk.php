@@ -221,7 +221,7 @@ $surat_masuk = getSuratMasuk();
           <table class="table table-bordered table-hover table-striped" id="table_id">
             <thead class="thead-dark">
               <tr>
-                <th>#</th>
+                <th>No</th>
                 <th>Kode Surat</th>
                 <th>Waktu Masuk</th>
                 <th>Nomor Surat</th>
