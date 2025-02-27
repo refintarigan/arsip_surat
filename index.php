@@ -43,9 +43,12 @@ $jumlahSurat = jumlahSeluruhSurat();
                         <div class="card bg-gradient-danger card-img-holder text-white">
                         <div class="card-body">
                             <img src="<?= $base_url; ?>assets/img/circle.svg" class="card-img-absolute" alt="circle-image" />
+                           
                             <h4 class="font-weight-normal mb-3">Total Seluruh Surat <i class="fa fa-group fs-24 float-end"></i>
                             </h4>
-                            <h2 class="mb-5"><?= $jumlahSurat; ?> Surat</h2>
+                            <a href="<?= $base_url; ?>surat/arsip.php">
+                            <h2 class="mb-5 text-white"><?= $jumlahSurat; ?> Surat</h2>
+                            </a>
                             <h6 class="card-text">Update per - <?= date("d M Y"); ?></h6>
                         </div>
                         </div>
@@ -54,9 +57,12 @@ $jumlahSurat = jumlahSeluruhSurat();
                         <div class="card bg-gradient-danger card-img-holder text-white">
                         <div class="card-body">
                             <img src="<?= $base_url; ?>assets/img/circle.svg" class="card-img-absolute" alt="circle-image" />
+                            
                             <h4 class="font-weight-normal mb-3">Jumlah Surat Masuk <i class="fa fa-group fs-24 float-end"></i>
                             </h4>
-                            <h2 class="mb-5"><?= mysqli_num_rows(getSuratMasuk()); ?> surat</h2>
+                            <a href="<?= $base_url; ?>surat/masuk.php">
+                            <h2 class="mb-5 text-white"><?= mysqli_num_rows(getSuratMasuk()); ?> surat</h2>
+                            </a>
                             <h6 class="card-text">Update per - <?= date("d M Y"); ?></h6>
                         </div>
                         </div>
@@ -67,7 +73,9 @@ $jumlahSurat = jumlahSeluruhSurat();
                             <img src="<?= $base_url; ?>assets/img/circle.svg" class="card-img-absolute" alt="circle-image" />
                             <h4 class="font-weight-normal mb-3">Jumlah Surat Keluar <i class="fa fa-group fs-24 float-end"></i>
                             </h4>
-                            <h2 class="mb-5"><?= mysqli_num_rows(getSuratKeluar()); ?> surat</h2>
+                            <a href="<?= $base_url; ?>surat/keluar.php">
+                            <h2 class="mb-5 text-white"><?= mysqli_num_rows(getSuratKeluar()); ?> surat</h2>
+                            </a>
                             <h6 class="card-text">Update per - <?= date("d M Y"); ?></h6>
                         </div>
                         </div>

@@ -19,9 +19,10 @@
     <div style="height:100vh;" class="row justify-content-center align-items-center">
         <div class="col-md-8 animate__animated animate__backInDown">
             <a class="link" href="user_log/login.php">
-                <img  src="assets/img/logoo.png" width="100%">
+                <img  src="assets/img/logoo.png" width="95%">
+                <br><br>
             </a>
-            <h3 class="text-center">Silahkan Klik Icon di atas !</h3>
+            <h3 class="text-center">Silahkan Klik Icon Di Atas !</h3>
         </div>
     </div>
 </div>
