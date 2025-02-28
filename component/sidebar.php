@@ -37,7 +37,7 @@ $get_userLog = get_userLog($_SESSION["id_user"]);
           <a href="<?= $base_url; ?>index.php" class="nav-link active">
             <i class="nav-icon fas fa-home"></i>
             <p>
-              Home
+              Halaman Utama
             </p>
           </a>
         </li>
@@ -80,7 +80,7 @@ $get_userLog = get_userLog($_SESSION["id_user"]);
             <a href="<?= $base_url; ?>#" class="nav-link">
               <i class="nav-icon fa fa-key"></i>
               <p>
-                User Akses
+                Kelola Pengguna
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
