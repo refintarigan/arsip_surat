@@ -54,7 +54,7 @@ $get_userLog = get_userLog($_SESSION["id_user"]);
             <li class="nav-item">
               <a href="<?= $base_url; ?>surat/masuk.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p> Surat masuk </p>
+                <p> Surat Masuk </p>
               </a>
             </li>
           </ul>
@@ -62,7 +62,7 @@ $get_userLog = get_userLog($_SESSION["id_user"]);
             <li class="nav-item">
               <a href="<?= $base_url; ?>surat/keluar.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p> surat keluar</p>
+                <p> Surat Keluar</p>
               </a>
             </li>
           </ul>
@@ -70,7 +70,7 @@ $get_userLog = get_userLog($_SESSION["id_user"]);
             <li class="nav-item">
               <a href="<?= $base_url; ?>surat/arsip.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p> surat arsip</p>
+                <p> Surat Arsip</p>
               </a>
             </li>
           </ul>
@@ -88,7 +88,7 @@ $get_userLog = get_userLog($_SESSION["id_user"]);
               <li class="nav-item">
                 <a href="<?= $base_url; ?>users_manajemen/user_akses.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p> Akses user</p>
+                  <p> Tambah Pengguna Admin/Pegawai</p>
                 </a>
               </li>
             </ul>
