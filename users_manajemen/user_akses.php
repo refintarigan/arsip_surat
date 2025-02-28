@@ -8,7 +8,7 @@ $users = mysqli_query($conn, "SELECT * FROM users");
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <title>Data Admin</title>
+    <title>Pengguna</title>
     <?php include "../component/css.php"; ?>
     <link rel="stylesheet" href="<?= $base_url; ?>assets/cropper/cropper.min.css">
 </head>
@@ -22,11 +22,11 @@ $users = mysqli_query($conn, "SELECT * FROM users");
             <div class="container">
                 <div class="row mb-2">
                     <div class="col-sm">
-                        <h1 class="m-0 text-dark">Data Admin</h1>
+                        <h1 class="m-0 text-dark">Kelola Pengguna</h1>
                     </div>
                     <div class="col-sm text-right">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambah_admin">
-                            <i class="fas fa-fw fa-plus"></i> Tambah admin
+                            <i class="fas fa-fw fa-plus"></i> Tambah Pengguna
                         </button>
                     </div>
                 </div>
