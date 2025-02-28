@@ -94,7 +94,7 @@ $surat_list = getAllSurat($conn);
                                 <th>Kepada</th>
                             </tr>
                         </thead>
-                        <tbody>
+                     <tbody>
                             <?php $i = 1; ?>
                             <?php foreach ($surat_list as $surat) { ?>
                                 <tr>
