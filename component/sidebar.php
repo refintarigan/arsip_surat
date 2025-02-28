@@ -88,7 +88,7 @@ $get_userLog = get_userLog($_SESSION["id_user"]);
               <li class="nav-item">
                 <a href="<?= $base_url; ?>users_manajemen/user_akses.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p> Tambah Pengguna Admin/Pegawai</p>
+                  <p> Tambah Admin/Pegawai</p>
                 </a>
               </li>
             </ul>
