@@ -1,7 +1,7 @@
 <?php
 include "../connection/functions.php";
 cekLogin("../user_log/login.php");
-$surat_masuk = getSuratKeluar();
+$surat_keluar = getSuratKeluar();
 
 ?>
 
@@ -227,7 +227,7 @@ $surat_masuk = getSuratKeluar();
                 </thead>
                 <tbody>
                   <?php $i = 1; ?>
-                  <?php foreach ($surat_masuk as $surat) { ?>
+                  <?php foreach ($surat_keluar as $surat) { ?>
                   <tr>
                     <td><?= $i++; ?></td>
                     <td><?= $surat['kode_surat']; ?></td>

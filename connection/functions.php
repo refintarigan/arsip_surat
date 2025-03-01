@@ -129,6 +129,41 @@ function lampiran()
         return NULL; // Jika gagal menyimpan file, tetap lanjut
     }
 }
+function lampirankeluar()
+{
+    if (!isset($_FILES['file_surat']) || $_FILES['file_surat']['error'] === 4) {
+        return NULL; // NULL file yang diunggah, tetap lanjut tanpa error
+    }
+
+    $namaFile = $_FILES['file_surat']['name'];
+    $ukuranFile = $_FILES['file_surat']['size'];
+    $tmpName = $_FILES['file_surat']['tmp_name'];
+
+    $ekstensiValid = ['pdf', 'doc', 'docx'];
+    $ekstensiFile = pathinfo($namaFile, PATHINFO_EXTENSION);
+    $ekstensiFile = strtolower($ekstensiFile);
+
+    if (!in_array($ekstensiFile, $ekstensiValid)) {
+        setAlert('File gagal disimpan', 'Format file tidak valid!', 'error');
+        header('Location: ../keluar.php');
+        exit();
+    }
+
+    if ($ukuranFile > 50000000) {
+        setAlert('File gagal disimpan', 'Ukuran file terlalu besar!', 'error');
+        header('Location: ../keluar.php');
+        exit();
+    }
+
+    $namaFileBaru = uniqid() . '.' . $ekstensiFile;
+    $targetPath = '../../assets/files/surat_keluar/' . $namaFileBaru;
+
+    if (move_uploaded_file($tmpName, $targetPath)) {
+        return $namaFileBaru;
+    } else {
+        return NULL; // Jika gagal menyimpan file, tetap lanjut
+    }
+}
 
 function editSuratMasuk($surat) 
 {
@@ -296,6 +331,59 @@ function editLampiran($id)
 
     if (!empty($lampiranLama)) {
         $fileLama = '../../assets/files/surat_masuk/' . $lampiranLama;
+        if (file_exists($fileLama)) {
+            unlink($fileLama);
+        }
+    }
+
+    if (move_uploaded_file($tmpName, $targetPath)) {
+        return $namaFileBaru;
+    } else {
+        return NULL; 
+    }
+}
+function editLampirankeluar($id)
+{
+    global $conn;
+    if (!isset($_FILES['file_surat']) || $_FILES['file_surat']['error'] === 4) {
+        return NULL; 
+    }
+
+    $namaFile = $_FILES['file_surat']['name'];
+    $ukuranFile = $_FILES['file_surat']['size'];
+    $tmpName = $_FILES['file_surat']['tmp_name'];
+
+    $ekstensiValid = ['pdf', 'doc', 'docx'];
+    $ekstensiFile = pathinfo($namaFile, PATHINFO_EXTENSION);
+    $ekstensiFile = strtolower($ekstensiFile);
+
+    if (!in_array($ekstensiFile, $ekstensiValid)) {
+        setAlert('File gagal disimpan', 'Format file tidak valid!', 'error');
+        header('Location: ../keluar.php');
+        exit();
+    }
+
+    if ($ukuranFile > 50000000) {
+        setAlert('File gagal disimpan', 'Ukuran file terlalu besar!', 'error');
+        header('Location: ../keluar.php');
+        exit();
+    }
+
+    // Nama file baru yang unik
+    $namaFileBaru = uniqid() . '.' . $ekstensiFile;
+    $targetPath = '../../assets/files/surat_keluar/' . $namaFileBaru;
+
+    // Cek apakah file lama ada di database
+    $query = "SELECT lampiran FROM surat_keluar WHERE id = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_bind_result($stmt, $lampiranLama);
+    mysqli_stmt_fetch($stmt);
+    mysqli_stmt_close($stmt);
+
+    if (!empty($lampiranLama)) {
+        $fileLama = '../../assets/files/surat_keluar/' . $lampiranLama;
         if (file_exists($fileLama)) {
             unlink($fileLama);
         }

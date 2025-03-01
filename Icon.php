@@ -17,7 +17,7 @@
 <body>
 <div class="container">
     <div style="height:100vh;" class="row justify-content-center align-items-center">
-        <div class="col-md-8 animate__animated animate__backInDown">
+        <div class="col-md-8 animate__animated animate__flipInX">
             <a class="link" href="user_log/login.php">
                 <img  src="assets/img/logoo.png" width="95%">
                 <br><br>
