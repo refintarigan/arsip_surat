@@ -28,6 +28,7 @@ function decode_id($tb, $id, $kolom)
     return null;
 }
 
+//======== function menampilkan pesan ===========//
 function setAlert($title = '', $text = '', $type = '', $buttons = '')
 {
     $_SESSION['pesan'] = [
@@ -38,7 +39,8 @@ function setAlert($title = '', $text = '', $type = '', $buttons = '')
     ];
 }
 
-if (isset($_SESSION['pesan'])) {
+if (isset($_SESSION['pesan'])) 
+{
     $title = $_SESSION['pesan']['title'];
     $text = $_SESSION['pesan']['text'];
     $type = $_SESSION['pesan']['type'];
@@ -67,7 +69,9 @@ if (isset($_SESSION['pesan'])) {
 
     unset($_SESSION['pesan']);
 }
+//======== end function menampilkan pesan ===========//
 
+//======= function tambah surat masuk dan keluar =======//
 function tambahSuratMasuk($data) 
 {
     global $conn;
@@ -79,92 +83,58 @@ function tambahSuratMasuk($data)
     $perihal = mysqli_real_escape_string($conn, htmlspecialchars($data["perihal"]));
     $pengirim = mysqli_real_escape_string($conn, htmlspecialchars($data["pengirim"]));
     $kepada = mysqli_real_escape_string($conn, htmlspecialchars($data["kepada"]));
-
+    $jenis_surat = mysqli_real_escape_string($conn, htmlspecialchars($data["jenis_surat"]));
+    
     // Simpan hasil lampiran hanya jika ada file yang diunggah
-    $lampiran = lampiran();
+    $lampiran = lampiran($jenis_surat);
     if ($lampiran === NULL) {
         $lampiran = NULL; // Bisa diisi dengan string default
     }
-
+    
     $query = "INSERT INTO surat_masuk (kode_surat, waktu_masuk, nomor_surat, tanggal_surat, perihal, pengirim, kepada, lampiran) 
               VALUES ('$kode', '$waktu', '$nomor', '$tanggal', '$perihal', '$pengirim', '$kepada', '$lampiran')";
 
-    mysqli_query($conn, $query);
-    return mysqli_affected_rows($conn);
+mysqli_query($conn, $query);
+return mysqli_affected_rows($conn);
 }
 
-
-function lampiran()
+function tambahSuratKeluar($data) 
 {
-    if (!isset($_FILES['file_surat']) || $_FILES['file_surat']['error'] === 4) {
-        return NULL; // NULL file yang diunggah, tetap lanjut tanpa error
+    global $conn;
+    
+    $kode = strval(htmlspecialchars($data["kode_surat"]));
+    $waktu = htmlspecialchars($data["waktu_masuk"]);
+    $nomor = htmlspecialchars($data["nomor_surat"]);
+    $tanggal = htmlspecialchars($data["tanggal_surat"]);
+    $perihal = htmlspecialchars($data["perihal"]);
+    $pengirim = htmlspecialchars($data["pengirim"]);
+    $kepada = htmlspecialchars($data["kepada"]);
+    $jenis_surat = mysqli_real_escape_string($conn, htmlspecialchars($data["jenis_surat"]));
+
+    $lampiran = lampiran($jenis_surat);
+    if ($lampiran === NULL) {
+        $lampiran = NULL;
     }
 
-    $namaFile = $_FILES['file_surat']['name'];
-    $ukuranFile = $_FILES['file_surat']['size'];
-    $tmpName = $_FILES['file_surat']['tmp_name'];
-
-    $ekstensiValid = ['pdf', 'doc', 'docx'];
-    $ekstensiFile = pathinfo($namaFile, PATHINFO_EXTENSION);
-    $ekstensiFile = strtolower($ekstensiFile);
-
-    if (!in_array($ekstensiFile, $ekstensiValid)) {
-        setAlert('File gagal disimpan', 'Format file tidak valid!', 'error');
-        header('Location: ../masuk.php');
-        exit();
-    }
-
-    if ($ukuranFile > 50000000) {
-        setAlert('File gagal disimpan', 'Ukuran file terlalu besar!', 'error');
-        header('Location: ../masuk.php');
-        exit();
-    }
-
-    $namaFileBaru = uniqid() . '.' . $ekstensiFile;
-    $targetPath = '../../assets/files/surat_masuk/' . $namaFileBaru;
-
-    if (move_uploaded_file($tmpName, $targetPath)) {
-        return $namaFileBaru;
+    $query = "INSERT INTO surat_keluar (kode_surat, waktu_keluar, nomor_surat, tanggal_surat, perihal, pengirim, kepada, lampiran) 
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    
+    if ($stmt = mysqli_prepare($conn, $query)) {
+        mysqli_stmt_bind_param($stmt, "ssssssss", $kode, $waktu, $nomor, $tanggal, $perihal, $pengirim, $kepada, $lampiran);
+        mysqli_stmt_execute($stmt);
+        $affected_rows = mysqli_stmt_affected_rows($stmt);
+        mysqli_stmt_close($stmt);
+        return $affected_rows;
     } else {
-        return NULL; // Jika gagal menyimpan file, tetap lanjut
-    }
-}
-function lampirankeluar()
-{
-    if (!isset($_FILES['file_surat']) || $_FILES['file_surat']['error'] === 4) {
-        return NULL; // NULL file yang diunggah, tetap lanjut tanpa error
-    }
-
-    $namaFile = $_FILES['file_surat']['name'];
-    $ukuranFile = $_FILES['file_surat']['size'];
-    $tmpName = $_FILES['file_surat']['tmp_name'];
-
-    $ekstensiValid = ['pdf', 'doc', 'docx'];
-    $ekstensiFile = pathinfo($namaFile, PATHINFO_EXTENSION);
-    $ekstensiFile = strtolower($ekstensiFile);
-
-    if (!in_array($ekstensiFile, $ekstensiValid)) {
-        setAlert('File gagal disimpan', 'Format file tidak valid!', 'error');
-        header('Location: ../keluar.php');
-        exit();
-    }
-
-    if ($ukuranFile > 50000000) {
-        setAlert('File gagal disimpan', 'Ukuran file terlalu besar!', 'error');
-        header('Location: ../keluar.php');
-        exit();
-    }
-
-    $namaFileBaru = uniqid() . '.' . $ekstensiFile;
-    $targetPath = '../../assets/files/surat_keluar/' . $namaFileBaru;
-
-    if (move_uploaded_file($tmpName, $targetPath)) {
-        return $namaFileBaru;
-    } else {
-        return NULL; // Jika gagal menyimpan file, tetap lanjut
+        return -1; 
     }
 }
 
+//====== end function tambah surat masuk dan keluar =======//
+
+
+
+//====== funtion edit surat masuk and keluar ===========//
 function editSuratMasuk($surat) 
 {
     global $conn;
@@ -184,9 +154,10 @@ function editSuratMasuk($surat)
     $perihal = htmlspecialchars($surat["perihal"]);
     $pengirim = htmlspecialchars($surat["pengirim"]);
     $kepada = htmlspecialchars($surat["kepada"]);
+    $jenis_surat = htmlspecialchars($surat["jenis_surat"]);
 
     // Panggil editLampiran dan dapatkan nama file baru jika ada
-    $lampiran = editLampiran($id);
+    $lampiran = editLampiran($id, $jenis_surat);
 
     // Query update dengan kode_surat dikembalikan
     $query = "UPDATE surat_masuk SET 
@@ -226,6 +197,8 @@ function editSuratMasuk($surat)
         return -1; // Indikasi gagal eksekusi query
     }
 }
+
+
 function editSuratKeluar($surat) 
 {
     global $conn;
@@ -245,9 +218,10 @@ function editSuratKeluar($surat)
     $perihal = htmlspecialchars($surat["perihal"]);
     $pengirim = htmlspecialchars($surat["pengirim"]);
     $kepada = htmlspecialchars($surat["kepada"]);
+    $jenis_surat = htmlspecialchars($surat["jenis_surat"]);
 
     // Panggil editLampiran dan dapatkan nama file baru jika ada
-    $lampiran = editLampiran($id);
+    $lampiran = editLampiran($id, $jenis_surat);
 
     // Query update dengan kode_surat dikembalikan
     $query = "UPDATE surat_keluar SET 
@@ -287,19 +261,21 @@ function editSuratKeluar($surat)
         return -1; // Indikasi gagal eksekusi query
     }
 }
+//====== end funtion edit surat masuk and keluar ===========//
 
 
-function editLampiran($id)
+
+//======= fuction kelola lampiran surat =======//
+function lampiran($jenis_surat)
 {
-    global $conn;
     if (!isset($_FILES['file_surat']) || $_FILES['file_surat']['error'] === 4) {
-        return NULL; 
+        return NULL; // NULL file yang diunggah, tetap lanjut tanpa error
     }
-
+    
     $namaFile = $_FILES['file_surat']['name'];
     $ukuranFile = $_FILES['file_surat']['size'];
     $tmpName = $_FILES['file_surat']['tmp_name'];
-
+    
     $ekstensiValid = ['pdf', 'doc', 'docx'];
     $ekstensiFile = pathinfo($namaFile, PATHINFO_EXTENSION);
     $ekstensiFile = strtolower($ekstensiFile);
@@ -316,65 +292,51 @@ function editLampiran($id)
         exit();
     }
 
-    // Nama file baru yang unik
     $namaFileBaru = uniqid() . '.' . $ekstensiFile;
-    $targetPath = '../../assets/files/surat_masuk/' . $namaFileBaru;
-
-    // Cek apakah file lama ada di database
-    $query = "SELECT lampiran FROM surat_masuk WHERE id = ?";
-    $stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmt, "i", $id);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_bind_result($stmt, $lampiranLama);
-    mysqli_stmt_fetch($stmt);
-    mysqli_stmt_close($stmt);
-
-    if (!empty($lampiranLama)) {
-        $fileLama = '../../assets/files/surat_masuk/' . $lampiranLama;
-        if (file_exists($fileLama)) {
-            unlink($fileLama);
-        }
-    }
+    $targetPath = '../../assets/files/surat_'. $jenis_surat .'/' . $namaFileBaru;
 
     if (move_uploaded_file($tmpName, $targetPath)) {
         return $namaFileBaru;
     } else {
-        return NULL; 
+        return NULL; // Jika gagal menyimpan file, tetap lanjut
     }
 }
-function editLampirankeluar($id)
+
+
+
+
+function editLampiran($id, $jenis_surat)
 {
     global $conn;
     if (!isset($_FILES['file_surat']) || $_FILES['file_surat']['error'] === 4) {
         return NULL; 
     }
-
+    
     $namaFile = $_FILES['file_surat']['name'];
     $ukuranFile = $_FILES['file_surat']['size'];
     $tmpName = $_FILES['file_surat']['tmp_name'];
-
+    
     $ekstensiValid = ['pdf', 'doc', 'docx'];
-    $ekstensiFile = pathinfo($namaFile, PATHINFO_EXTENSION);
-    $ekstensiFile = strtolower($ekstensiFile);
-
+    $ekstensiFile = strtolower(pathinfo($namaFile, PATHINFO_EXTENSION));
+    
     if (!in_array($ekstensiFile, $ekstensiValid)) {
         setAlert('File gagal disimpan', 'Format file tidak valid!', 'error');
-        header('Location: ../keluar.php');
+        header('Location: ../' . $jenis_surat . '.php');
         exit();
     }
 
     if ($ukuranFile > 50000000) {
         setAlert('File gagal disimpan', 'Ukuran file terlalu besar!', 'error');
-        header('Location: ../keluar.php');
+        header('Location: ../' . $jenis_surat . '.php');
         exit();
     }
 
     // Nama file baru yang unik
     $namaFileBaru = uniqid() . '.' . $ekstensiFile;
-    $targetPath = '../../assets/files/surat_keluar/' . $namaFileBaru;
-
+    $targetPath = '../../assets/files/surat_' . $jenis_surat . '/' . $namaFileBaru;
+    
     // Cek apakah file lama ada di database
-    $query = "SELECT lampiran FROM surat_keluar WHERE id = ?";
+    $query = "SELECT lampiran FROM surat_" . $jenis_surat . " WHERE id = ?";
     $stmt = mysqli_prepare($conn, $query);
     mysqli_stmt_bind_param($stmt, "i", $id);
     mysqli_stmt_execute($stmt);
@@ -383,12 +345,12 @@ function editLampirankeluar($id)
     mysqli_stmt_close($stmt);
 
     if (!empty($lampiranLama)) {
-        $fileLama = '../../assets/files/surat_keluar/' . $lampiranLama;
+        $fileLama = '../../assets/files/surat_' . $jenis_surat . '/' . $lampiranLama;
         if (file_exists($fileLama)) {
             unlink($fileLama);
         }
     }
-
+    
     if (move_uploaded_file($tmpName, $targetPath)) {
         return $namaFileBaru;
     } else {
@@ -396,6 +358,12 @@ function editLampirankeluar($id)
     }
 }
 
+//======= end fuction kelola lampiran surat =======//
+
+
+
+
+//======= fuction kelola hapus surat =======//
 function hapusSurat($data){
 	global $conn;
     $id = $data['id'];
@@ -409,41 +377,11 @@ function hapusSuratKeluar($data){
 	global $conn;
     $id = $data['id'];
 	mysqli_query($conn, "DELETE FROM surat_keluar WHERE id=$id");
-    $tmp_file = '../../assets/files/surat_masuk/' . $data['lampiran'];
+    $tmp_file = '../../assets/files/surat_keluar/' . $data['lampiran'];
     unlink($tmp_file);
 	return mysqli_affected_rows($conn);
 }
-
-function tambahSuratKeluar($data) 
-{
-    global $conn;
-
-    $kode = strval(htmlspecialchars($data["kode_surat"]));
-    $waktu = htmlspecialchars($data["waktu_masuk"]);
-    $nomor = htmlspecialchars($data["nomor_surat"]);
-    $tanggal = htmlspecialchars($data["tanggal_surat"]);
-    $perihal = htmlspecialchars($data["perihal"]);
-    $pengirim = htmlspecialchars($data["pengirim"]);
-    $kepada = htmlspecialchars($data["kepada"]);
-
-    $lampiran = lampiran();
-    if ($lampiran === NULL) {
-        $lampiran = NULL;
-    }
-
-    $query = "INSERT INTO surat_keluar (kode_surat, waktu_keluar, nomor_surat, tanggal_surat, perihal, pengirim, kepada, lampiran) 
-              VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-    
-    if ($stmt = mysqli_prepare($conn, $query)) {
-        mysqli_stmt_bind_param($stmt, "ssssssss", $kode, $waktu, $nomor, $tanggal, $perihal, $pengirim, $kepada, $lampiran);
-        mysqli_stmt_execute($stmt);
-        $affected_rows = mysqli_stmt_affected_rows($stmt);
-        mysqli_stmt_close($stmt);
-        return $affected_rows;
-    } else {
-        return -1; 
-    }
-}
+//======= end fuction kelola hapus surat =======//
 
 
 function getSuratKeluar() 
@@ -460,6 +398,7 @@ function getSuratKeluar()
         return false;
     }
 }
+
 function getSuratMasuk() 
 {
     global $conn;
@@ -687,5 +626,6 @@ function jumlahSeluruhSurat()
 {
     global $conn;
     return count(getAllSurat($conn));
+    
 }
 

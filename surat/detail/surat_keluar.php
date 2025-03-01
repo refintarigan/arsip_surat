@@ -95,6 +95,7 @@ if (empty($surat)) {
                                                         <div class="col-md-6">
                                                             <!-- ID Surat (Hidden) -->
                                                             <input type="hidden" value="<?= encode_id($surat['id']); ?>" name="id_surat" id="id_surat">
+                                                            <input type="hidden" value="keluar" name="jenis_surat">
                                                             
                                                             <!-- Kode Surat -->
                                                             <div class="form-group">
@@ -173,9 +174,9 @@ if (empty($surat)) {
                                     </form>
                                 </div>
                             </div>
-                            <a href="<?= $base_url; ?>surat/proses_data/proses_data_all.php?hapus_suratKeluar=<?= encode_id($surat['id']); ?>">
-                                <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Hapus</button>
-                            </a>
+                            <button class="btn btn-danger btn-sm" onclick="suratKeluar('<?= encode_id($surat['id']); ?>')">
+                                <i class="fas fa-trash"></i> Hapus
+                            </button>
                         </td>
                     </tr>
                 </tbody>
@@ -186,7 +187,7 @@ if (empty($surat)) {
             <p>Data file tidak tersedia.</p>
         <?php } else { 
             // Ambil nama file lampiran
-            $filePath = $base_url . 'assets/files/surat_masuk/' . $surat['lampiran'];
+            $filePath = $base_url . 'assets/files/surat_keluar/' . $surat['lampiran'];
             $fileExtension = pathinfo($filePath, PATHINFO_EXTENSION);
             
             // Cek apakah file adalah Word (docx/doc)
@@ -215,7 +216,7 @@ if (empty($surat)) {
 <?php include "../../component/js.php"; ?>
    <script>
     $(document).ready(function () {
-        let fileUrl = $base_url . "assets/files/surat_masuk/<?php echo $surat['lampiran']; ?>"; 
+        let fileUrl = $base_url . "assets/files/surat_keluar/<?php echo $surat['lampiran']; ?>"; 
         $("#file-preview").attr("src", fileUrl).show();
     });
 </script>

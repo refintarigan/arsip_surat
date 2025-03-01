@@ -7,8 +7,7 @@ if(isset($_SESSION['id_user'])) {
     exit();
 }
  $password = password_hash("refin2910", PASSWORD_DEFAULT);
-//  mysqli_query($conn, "INSERT INTO users VALUE('', 'user_1', '$password', 'admin', 'user_1')");
-// mysqli_query($conn, "UPDATE users SET password = '$password' WHERE id = 2911 ");
+//  mysqli_query($conn, "INSERT INTO users VALUE('', 'username', '$password', 'role', 'nama', 'foto')");
 //  die();
 ?>
 <!DOCTYPE html>
