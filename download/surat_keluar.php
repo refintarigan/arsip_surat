@@ -10,8 +10,6 @@ if (!file_exists($file)) {
 $allowed_extensions = ['doc', 'docx', 'pdf'];
 $file_extension = pathinfo($file, PATHINFO_EXTENSION);
 
-var_dump($file);
-die;
 if (!in_array(strtolower($file_extension), $allowed_extensions)) {
     die("Akses ditolak!");
 }
