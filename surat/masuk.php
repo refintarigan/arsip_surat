@@ -28,104 +28,105 @@ $surat_masuk = getSuratMasuk();
           <div class="col-sm">
             <h1 class="m-0 text-dark">Surat Masuk</h1>
           </div>
-<div class="col-sm text-right">
-    <button type="button" data-toggle="modal" data-target="#add_mail" class="btn btn-primary">
-        <i class="fas fa-fw fa-plus"></i> Tambah Surat Masuk
-    </button>
+        <div class="col-sm text-right">
+            <button type="button" data-toggle="modal" data-target="#add_mail" class="btn btn-primary">
+                <i class="fas fa-fw fa-plus"></i> Tambah Surat Masuk
+            </button>
 
-    <!-- Modal -->
-    <div class="modal fade" id="add_mail" tabindex="-1" role="dialog" aria-labelledby="add_mail_q" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <form class="text-left" action="proses_data/proses_data_all.php" method="post" enctype="multipart/form-data">
-                <div class="modal-content shadow-lg rounded">
-                    <div class="modal-header bg-primary text-white">
-                        <h5 class="modal-title" id="add_mail_q">
-                            <i class="fas fa-envelope-open-text"></i> Tambah Surat Masuk
-                        </h5>
-                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <!-- Kode Surat -->
-                                    <div class="form-group">
-                                        <label for="kode_surat" class="font-weight-bold">Kode Surat</label>
-                                        <input type="text" name="kode_surat" required autocomplete="off" class="form-control" id="kode_surat" placeholder="Masukkan Kode Surat">
-                                    </div>
+            <!-- Modal -->
+            <div class="modal fade" id="add_mail" tabindex="-1" role="dialog" aria-labelledby="add_mail_q" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <form class="text-left" action="proses_data/proses_data_all.php" method="post" enctype="multipart/form-data">
+                        <div class="modal-content shadow-lg rounded">
+                            <div class="modal-header bg-primary text-white">
+                                <h5 class="modal-title" id="add_mail_q">
+                                    <i class="fas fa-envelope-open-text"></i> Tambah Surat Masuk
+                                </h5>
+                                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input type="hidden" name="jenis_surat" value="masuk">
+                                            <!-- Kode Surat -->
+                                            <div class="form-group">
+                                                <label for="kode_surat" class="font-weight-bold">Kode Surat</label>
+                                                <input type="text" name="kode_surat" required autocomplete="off" class="form-control" id="kode_surat" placeholder="Masukkan Kode Surat">
+                                            </div>
 
-                                    <!-- Waktu Masuk -->
-                                    <div class="form-group">
-                                        <label for="waktu_masuk" class="font-weight-bold">Waktu Masuk</label>
-                                        <input type="date" name="waktu_masuk" required autocomplete="off" class="form-control" id="waktu_masuk">
-                                    </div>
+                                            <!-- Waktu Masuk -->
+                                            <div class="form-group">
+                                                <label for="waktu_masuk" class="font-weight-bold">Waktu Masuk</label>
+                                                <input type="date" name="waktu_masuk" required autocomplete="off" class="form-control" id="waktu_masuk">
+                                            </div>
 
-                                    <!-- Nomor Surat -->
-                                    <div class="form-group">
-                                        <label for="nomor_surat" class="font-weight-bold">Nomor Surat</label>
-                                        <input type="text" name="nomor_surat" required autocomplete="off" class="form-control" id="nomor_surat" placeholder="Masukkan Nomor Surat">
-                                    </div>
+                                            <!-- Nomor Surat -->
+                                            <div class="form-group">
+                                                <label for="nomor_surat" class="font-weight-bold">Nomor Surat</label>
+                                                <input type="text" name="nomor_surat" required autocomplete="off" class="form-control" id="nomor_surat" placeholder="Masukkan Nomor Surat">
+                                            </div>
 
-                                    <!-- Tanggal Surat -->
-                                    <div class="form-group">
-                                        <label for="tanggal_surat" class="font-weight-bold">Tanggal Surat</label>
-                                        <input type="date" name="tanggal_surat" required autocomplete="off" class="form-control" id="tanggal_surat">
-                                    </div>
-                                </div>
+                                            <!-- Tanggal Surat -->
+                                            <div class="form-group">
+                                                <label for="tanggal_surat" class="font-weight-bold">Tanggal Surat</label>
+                                                <input type="date" name="tanggal_surat" required autocomplete="off" class="form-control" id="tanggal_surat">
+                                            </div>
+                                        </div>
 
-                                <div class="col-md-6">
-                                    <!-- Perihal -->
-                                    <div class="form-group">
-                                        <label for="perihal" class="font-weight-bold">Perihal</label>
-                                        <input type="text" name="perihal" required autocomplete="off" class="form-control" id="perihal" placeholder="Masukkan Perihal">
-                                    </div>
+                                        <div class="col-md-6">
+                                            <!-- Perihal -->
+                                            <div class="form-group">
+                                                <label for="perihal" class="font-weight-bold">Perihal</label>
+                                                <input type="text" name="perihal" required autocomplete="off" class="form-control" id="perihal" placeholder="Masukkan Perihal">
+                                            </div>
 
-                                    <!-- Pengirim -->
-                                    <div class="form-group">
-                                        <label for="pengirim" class="font-weight-bold">Pengirim</label>
-                                        <input type="text" name="pengirim" required autocomplete="off" class="form-control" id="pengirim" placeholder="Masukkan Nama Pengirim">
-                                    </div>
+                                            <!-- Pengirim -->
+                                            <div class="form-group">
+                                                <label for="pengirim" class="font-weight-bold">Pengirim</label>
+                                                <input type="text" name="pengirim" required autocomplete="off" class="form-control" id="pengirim" placeholder="Masukkan Nama Pengirim">
+                                            </div>
 
-                                    <!-- Kepada -->
-                                    <div class="form-group">
-                                        <label for="kepada" class="font-weight-bold">Kepada</label>
-                                        <input type="text" name="kepada" required autocomplete="off" class="form-control" id="kepada" placeholder="Masukkan Tujuan Surat">
-                                    </div>
-                                    <!-- Upload File -->
-                                    <div class="form-group">
-                                        <label for="file_surat" class="font-weight-bold">Upload Surat (PDF/DOC)</label>
-                                        <input type="file" name="file_surat" class="form-control-file" id="file_surat" accept=".pdf,.doc,.docx">
-                                        <small class="form-text text-muted">Format yang diizinkan: PDF, DOC, DOCX</small>
-                                    </div>
-                                </div>
+                                            <!-- Kepada -->
+                                            <div class="form-group">
+                                                <label for="kepada" class="font-weight-bold">Kepada</label>
+                                                <input type="text" name="kepada" required autocomplete="off" class="form-control" id="kepada" placeholder="Masukkan Tujuan Surat">
+                                            </div>
+                                            <!-- Upload File -->
+                                            <div class="form-group">
+                                                <label for="file_surat" class="font-weight-bold">Upload Surat (PDF/DOC)</label>
+                                                <input type="file" name="file_surat" class="form-control-file" id="file_surat" accept=".pdf,.doc,.docx">
+                                                <small class="form-text text-muted">Format yang diizinkan: PDF, DOC, DOCX</small>
+                                            </div>
+                                        </div>
 
-                                <div class="col-md-12">
+                                        <div class="col-md-12">
 
-                                    <!-- Preview File -->
-                                    <div class="form-group text-center">
-                                        <label for="file_preview" class="font-weight-bold">Preview File</label>
-                                        <iframe id="file_preview" class="d-none" width="100%" height="300px"></iframe>
+                                            <!-- Preview File -->
+                                            <div class="form-group text-center">
+                                                <label for="file_preview" class="font-weight-bold">Preview File</label>
+                                                <iframe id="file_preview" class="d-none" width="100%" height="300px"></iframe>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="modal-footer d-flex justify-content-between">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">
-                            <i class="fas fa-times"></i> Batal
-                        </button>
-                        <button type="submit" name="btnTambahSurat" class="btn btn-success">
-                            <i class="fas fa-save"></i> Simpan
-                        </button>
-                    </div>
+                            <div class="modal-footer d-flex justify-content-between">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                    <i class="fas fa-times"></i> Batal
+                                </button>
+                                <button type="submit" name="btnTambahSurat" class="btn btn-success">
+                                    <i class="fas fa-save"></i> Simpan
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
-    </div>
-</div>
 
 <!-- Script untuk Preview File -->
 <script>

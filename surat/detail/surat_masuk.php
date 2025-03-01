@@ -98,6 +98,7 @@ if (empty($surat)) {
                                                         <div class="col-md-6">
                                                             <!-- ID Surat (Hidden) -->
                                                             <input type="hidden" value="<?= encode_id($surat['id']); ?>" name="id_surat" id="id_surat">
+                                                            <input type="hidden" value="masuk" name="jenis_surat">
                                                             
                                                             <!-- Kode Surat -->
                                                             <div class="form-group">
