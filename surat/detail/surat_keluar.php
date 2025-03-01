@@ -174,7 +174,7 @@ if (empty($surat)) {
                                     </form>
                                 </div>
                             </div>
-                            <button class="btn btn-danger btn-sm" onclick="suratKeluar('<?= encode_id($surat['lampiran']); ?>')">
+                            <button class="btn btn-danger btn-sm" onclick="suratKeluar('<?= encode_id($surat['id']); ?>')">
                                 <i class="fas fa-trash"></i> Hapus
                             </button>
                         </td>
