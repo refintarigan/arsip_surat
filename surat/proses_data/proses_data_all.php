@@ -30,9 +30,8 @@ if (isset($_POST['btnEditSurat'])) {
         }
 }
 
-   //prosess hapus pendaftar
-   if (isset($_GET["hapus_surat"])) {
-      $id_surat = decode_id("surat_masuk", $_GET["hapus_surat"], "id");
+   if (isset($_GET["hapus_suratMasuk"])) {
+      $id_surat = decode_id("surat_masuk", $_GET["hapus_suratMasuk"], "id");
       if (hapusSurat($id_surat) > 0) {
       setAlert("Berhasil", "Data berhasil di hapus", "success");
       header('Location: ../masuk.php'); 

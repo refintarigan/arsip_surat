@@ -46,6 +46,7 @@ $surat_masuk = getSuratKeluar();
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-md-6">
+                                            <input type="hidden" name="jenis_surat" value="keluar">
                                             <!-- Kode Surat -->
                                             <div class="form-group">
                                                 <label for="kode_surat" class="font-weight-bold">Kode Surat</label>
