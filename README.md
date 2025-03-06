@@ -27,7 +27,7 @@
 
 ## 📸 Tampilan Antarmuka
 
-![Archivio Dashboard](assets/img/git.jpg)
+![Archivio Dashboard](assets/img/gitui.PNG)
 
 ## 📥 Instalasi & Penggunaan
 
